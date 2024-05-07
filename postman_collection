@@ -1,0 +1,3138 @@
+{
+	"info": {
+		"_postman_id": "d4ecb7b5-5e93-4765-90a6-7b17016d7752",
+		"name": "Quality Hunters",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32642538"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Validation Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json",
+								"uuid": "7c647b14-b2be-4071-b62e-795cb29e347d"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"uuid": "bae3ba51-2050-4587-be8b-17a37688acbb"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"mail\": \"sysadmin@qacoders.com\",\n  \"password\": \"1234@Test\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/login/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CT-0001 Login de sucesso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"mensagem de sucesso\", function(){\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.msg).to.eql(\"Olá Qa-Coders-SYSADMIN, autenticação autorizada com sucesso!\")\r",
+									"\r",
+									"})\r",
+									"\r",
+									"responseBody = pm.response.json();\r",
+									"pm.environment.set(\"token\", responseBody.token);\r",
+									"\r",
+									"pm.environment.set(\"Email\", pm.variables.replaceIn('{{$randomEmail}}'));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json",
+								"uuid": "2a898052-82b5-4abd-a8cc-78d13615e3d0"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"uuid": "0f3e149d-6d9f-4837-8294-d3d7348b22b6"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"mail\": \"sysadmin@qacoders.com\",\n  \"password\": \"1234@Test\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/login/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CT-0002 Não funcional - Email Vazio e senha preenchida",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"alert\", function(){\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.alert).to.eql(\"E-mail ou senha informados são inválidos.\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"mail\": \" \",\r\n  \"password\": \"1234@Test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/login/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CT-0003 Não funcional - Senha Vazia e email preenchido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"alert\", function(){\r",
+									"    pm.expect(pm.response.json().alert).to.eql(\"E-mail ou senha informados são inválidos.\")\r",
+									"\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json",
+								"uuid": "ebd1038b-c7b6-4d89-8e9d-765aaa49bbae"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"uuid": "93cfa8ef-e2a2-4523-a6e0-64b1f7b2852c"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"mail\": \"sysadmin@qacoders.com\",\n  \"password\": \" \"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/login/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CT-0006 Não funcional -  Login com email e senha contendo espaço em branco",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code is 400', function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Alert message is correct\", function () {\r",
+									"    pm.expect(pm.response.json().alert).to.eql(\"E-mail ou senha informados são inválidos.\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"mail\": \"sysadmin @qacoders.com\",\r\n  \"password\": \"1234 @Test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/login/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CT-0009 Não funcional -  login invalido e senha válida",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code is 400', function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Alert message is correct\", function () {\r",
+									"    pm.expect(pm.response.json().alert).to.eql(\"E-mail ou senha informados são inválidos.\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"mail\": \"ysadmin @qacoders.com\",\r\n  \"password\": \"1234@Test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/login/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cadastro de novo login",
+			"item": [
+				{
+					"name": "Teste de Sucesso",
+					"item": [
+						{
+							"name": "CT-0001 Funcional - campo nome completo  preenchido",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Gerar um número aleatório com 11 dígitos\r",
+											"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
+											"\r",
+											"// Converter para string\r",
+											"var randomString = randomNumber.toString();\r",
+											"\r",
+											"// Definir a variável de ambiente com o número gerado\r",
+											"pm.environment.set(\"randomNumber\", randomString);\r",
+											"\r",
+											"\r",
+											"function firstName() {\r",
+											" var firstName = [\"Nara\", \"Cyntia\", \"Fabiano\", \"Mara\", \"Rubia\", \"Flavia\", \"Nubia\", \"Lucielle\", \"Aparecida\", \"Rodrigo\", \"Jose\", \"Kelly\", \"Cristina\", \"Luciana\", \"Lana\", \"Marcia\", \"Luiz\", \"Marcio\", \"Iraides\", \"Ana\", \"Pedro\", \"Maria\", \"João\",\r",
+											" \"Mariana\", \"Lucas\", \"Carla\", \"Gustavo\", \"Juliana\", \"Rafael\"];\r",
+											" var randomItem = firstName[Math.floor(Math.random() * firstName.length)];\r",
+											" return randomItem;\r",
+											"\r",
+											"}\r",
+											"pm.environment.set(\"FirstName\", firstName());\r",
+											"\r",
+											"\r",
+											"function lastName() {\r",
+											" var lastName = [\"Silva\", \"Marquez\", \"Gonçalves\", \"Santos\", \"Bueno\", \"Danesi\", \"Arruda\", \"Cardoso\", \"Fonseca\", \"Smith\", \"Pascoalle\", \"Marques\"];\r",
+											" var randomItem = lastName[Math.floor(Math.random() * lastName.length)];\r",
+											" return randomItem;\r",
+											"\r",
+											"}\r",
+											"pm.environment.set(\"LastName\", lastName());\r",
+											"\r",
+											"\r",
+											"pm.environment.set(\"FullName\", pm.variables.get(\"FirstName\") + \" \" + pm.variables.get(\"LastName\"));\r",
+											"\r",
+											"pm.environment.set(\"Email\", pm.variables.replaceIn('{{$randomEmail}}'));"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code name has string\", function () {\r",
+											"    pm.response.to.have.status(\"Created\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"uuid": "d08317c9-fe02-425a-b42b-62be2aa26090"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"uuid": "ce3c25f0-118b-4197-92f3-6cf229f89f3b"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGU3ZjBlMTZiYmU3M2VkMWUxYzEiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRZWWpPM1d3ZlgwOHROMHJTWkQ1UVVlWW0wb2h1cGJCTkdzZnFUc3hnUHdIalMyYnFvcGR1eSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjM0OjIzIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBlN2YwZTE2YmJlNzNlZDFlMWMyIn1dLCJfX3YiOjAsImlhdCI6MTcwOTIzMzQxNiwiZXhwIjoxNzA5MzE5ODE2fQ.AifdGJewaXsoJqvsOy7j4b2Q9MpNGGoeclHNfStrHHc",
+										"type": "text",
+										"uuid": "08c2969b-f15c-4d5f-9b47-a8249933f795"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"fullName\": \"{{FullName}}\",\n  \"mail\": \"{{Email}}\",\n  \"password\": \"1234@Test\",\n  \"accessProfile\": \"ADMIN\",\n  \"cpf\": \"{{randomNumber}}\",\n  \"confirmPassword\": \"1234@Test\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/user/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CT-0002 Funcional -  campo nome completo  maximo 100 caracteres",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Gerar um número aleatório com 11 dígitos\r",
+											"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
+											"\r",
+											"// Converter para string\r",
+											"var randomString = randomNumber.toString();\r",
+											"\r",
+											"// Definir a variável de ambiente com o número gerado\r",
+											"pm.environment.set(\"randomNumber\", randomString);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Content-Type is present\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"uuid": "1ec5459d-ab8a-48de-ab3e-10f5d6a5ecbe"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"uuid": "8e2f5fde-f83b-43fa-9037-136062804aa0"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGU3ZjBlMTZiYmU3M2VkMWUxYzEiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRZWWpPM1d3ZlgwOHROMHJTWkQ1UVVlWW0wb2h1cGJCTkdzZnFUc3hnUHdIalMyYnFvcGR1eSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjM0OjIzIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBlN2YwZTE2YmJlNzNlZDFlMWMyIn1dLCJfX3YiOjAsImlhdCI6MTcwOTIzMzQxNiwiZXhwIjoxNzA5MzE5ODE2fQ.AifdGJewaXsoJqvsOy7j4b2Q9MpNGGoeclHNfStrHHc",
+										"type": "text",
+										"uuid": "86335476-ce90-45f6-9575-aa54b585cd15"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"fullName\": \"Nara Cyntia Marquez Nara Cyntia Marquez Nara Cyntia Marquez Nara Cyntia Marquez Nara Cyntia Marquezm\",\n \"mail\": \"{{$randomEmail}}\",\n    \"password\": \"1234@Test\",\n    \"accessProfile\": \"ADMIN\",\n    \"cpf\": \"{{randomNumber}}\",\n    \"confirmPassword\": \"1234@Test\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/user/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CT-0003 - Enviar com o campo email valido",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Gerar um número aleatório com 11 dígitos\r",
+											"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
+											"\r",
+											"// Converter para string\r",
+											"var randomString = randomNumber.toString();\r",
+											"\r",
+											"// Definir a variável de ambiente com o número gerado\r",
+											"pm.environment.set(\"randomNumber\", randomString);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status code mail has string\", function () {\r",
+											"    pm.response.to.have.status(\"Created\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"uuid": "6b934cfd-96ad-4213-965c-1d64147f910f"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"uuid": "9d313195-6356-4b4b-9257-ddb1fb26fbd6"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGU3ZjBlMTZiYmU3M2VkMWUxYzEiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRZWWpPM1d3ZlgwOHROMHJTWkQ1UVVlWW0wb2h1cGJCTkdzZnFUc3hnUHdIalMyYnFvcGR1eSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjM0OjIzIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBlN2YwZTE2YmJlNzNlZDFlMWMyIn1dLCJfX3YiOjAsImlhdCI6MTcwOTIzMzQxNiwiZXhwIjoxNzA5MzE5ODE2fQ.AifdGJewaXsoJqvsOy7j4b2Q9MpNGGoeclHNfStrHHc",
+										"type": "text",
+										"uuid": "ee83d80f-977d-41f9-aa9f-ebb2acd0a822"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"fullName\": \"{{FullName}}\",\n  \"mail\": \"{{$randomEmail}}\",\n  \"password\": \"1234@Test\",\n  \"accessProfile\": \"ADMIN\",\n  \"cpf\": \"{{randomNumber}}\",\n  \"confirmPassword\": \"1234@Test\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/user/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CT-0007 - Senha - deve conter no mínimo 8 caracteres",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Gerar um número aleatório com 11 dígitos\r",
+											"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
+											"\r",
+											"// Converter para string\r",
+											"var randomString = randomNumber.toString();\r",
+											"\r",
+											"// Definir a variável de ambiente com o número gerado\r",
+											"pm.environment.set(\"randomNumber\", randomString);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Status code senha has string\", function () {\r",
+											"    pm.response.to.have.status(\"Created\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"uuid": "fb2b44d2-9e87-4ad0-9e78-100f88186330"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"uuid": "c23a870e-cadd-40e9-99ba-32b949b7d448"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGU3ZjBlMTZiYmU3M2VkMWUxYzEiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRZWWpPM1d3ZlgwOHROMHJTWkQ1UVVlWW0wb2h1cGJCTkdzZnFUc3hnUHdIalMyYnFvcGR1eSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjM0OjIzIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBlN2YwZTE2YmJlNzNlZDFlMWMyIn1dLCJfX3YiOjAsImlhdCI6MTcwOTIzMzQxNiwiZXhwIjoxNzA5MzE5ODE2fQ.AifdGJewaXsoJqvsOy7j4b2Q9MpNGGoeclHNfStrHHc",
+										"type": "text",
+										"uuid": "fdc325e5-8828-4fc8-a636-543bbc5e2567"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"fullName\": \"{{FullName}}\",\n  \"mail\": \"{{$randomEmail}}\",\n  \"password\": \"1234@Test\",\n  \"accessProfile\": \"ADMIN\",\n  \"cpf\": \"{{randomNumber}}\",\n  \"confirmPassword\": \"1234@Test\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/user/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CT-0012 - Senha - Deve conter menos uma letra maiúscula, minúscula, caractere especial e números.",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Gerar um número aleatório com 11 dígitos\r",
+											"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
+											"\r",
+											"// Converter para string\r",
+											"var randomString = randomNumber.toString();\r",
+											"\r",
+											"// Definir a variável de ambiente com o número gerado\r",
+											"pm.environment.set(\"randomNumber\", randomString);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 201', function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"})\r",
+											"\r",
+											"pm.test(\"password is a string\", function () {\r",
+											"    pm.expect(typeof pm.response.json().user.password).to.be.a('string');\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"uuid": "62d3110d-a251-46e9-b24b-eecf98a7224b"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"uuid": "1236cefe-1a4b-46bb-bab3-eae411f7f65e"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGU3ZjBlMTZiYmU3M2VkMWUxYzEiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRZWWpPM1d3ZlgwOHROMHJTWkQ1UVVlWW0wb2h1cGJCTkdzZnFUc3hnUHdIalMyYnFvcGR1eSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjM0OjIzIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBlN2YwZTE2YmJlNzNlZDFlMWMyIn1dLCJfX3YiOjAsImlhdCI6MTcwOTIzMzQxNiwiZXhwIjoxNzA5MzE5ODE2fQ.AifdGJewaXsoJqvsOy7j4b2Q9MpNGGoeclHNfStrHHc",
+										"type": "text",
+										"uuid": "2541472b-6816-4118-9ded-e1d7cdacc130"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"fullName\": \"Nara Cyntia Marquez\",\n  \"mail\": \"{{$randomEmail}}\",\n  \"password\": \"1234@Test1\",\n  \"accessProfile\": \"ADMIN\",\n  \"cpf\": \"{{randomNumber}}\",\n  \"confirmPassword\": \"1234@Test1\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/user/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CT-0014 - Senha - validar campo vazio",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Gerar um número aleatório com 11 dígitos\r",
+											"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
+											"\r",
+											"// Converter para string\r",
+											"var randomString = randomNumber.toString();\r",
+											"\r",
+											"// Definir a variável de ambiente com o número gerado\r",
+											"pm.environment.set(\"randomNumber\", randomString);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"mensagem de erro\", function(){\r",
+											"    pm.expect(pm.response.json().error).to.eql([\"O campo de confirmação de senha é obrigatório.\"])\r",
+											"\r",
+											"})\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"uuid": "990cff9d-1925-4a2f-b18f-d5fcdb3ff0b1"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"uuid": "1695da9d-a7d5-49f0-8226-6b7dbdc743cd"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGU3ZjBlMTZiYmU3M2VkMWUxYzEiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRZWWpPM1d3ZlgwOHROMHJTWkQ1UVVlWW0wb2h1cGJCTkdzZnFUc3hnUHdIalMyYnFvcGR1eSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjM0OjIzIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBlN2YwZTE2YmJlNzNlZDFlMWMyIn1dLCJfX3YiOjAsImlhdCI6MTcwOTIzMzQxNiwiZXhwIjoxNzA5MzE5ODE2fQ.AifdGJewaXsoJqvsOy7j4b2Q9MpNGGoeclHNfStrHHc",
+										"uuid": "a9ce3dc7-3266-4c1d-a18f-3c553fc15868"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"fullName\": \"Nara Cyntia Marquez\",\n  \"mail\": \"{{$randomEmail}}\",\n  \"password\": \"1234@Test\",\n  \"accessProfile\": \"ADMIN\",\n  \"cpf\": \"{{randomNumber}}\",\n  \"confirmPassword\": \"\"\n}\n\n"
+								},
+								"url": {
+									"raw": "{{url}}/api/user/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CT-0016 - verificar retorno de \"as senhas não conferem\"",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Gerar um número aleatório com 11 dígitos\r",
+											"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
+											"\r",
+											"// Converter para string\r",
+											"var randomString = randomNumber.toString();\r",
+											"\r",
+											"// Definir a variável de ambiente com o número gerado\r",
+											"pm.environment.set(\"randomNumber\", randomString);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"mensagem de erro\", function(){\r",
+											"    pm.expect(pm.response.json().error).to.eql([\"As senhas não coincidem.\"])\r",
+											"\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "value",
+											"value": "{{novotoken}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"uuid": "50ec1f49-ce66-43dc-8703-8e9e4481295d"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"uuid": "f0e3de6b-5466-459a-89f4-76010febfe6d"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGU3ZjBlMTZiYmU3M2VkMWUxYzEiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRZWWpPM1d3ZlgwOHROMHJTWkQ1UVVlWW0wb2h1cGJCTkdzZnFUc3hnUHdIalMyYnFvcGR1eSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjM0OjIzIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBlN2YwZTE2YmJlNzNlZDFlMWMyIn1dLCJfX3YiOjAsImlhdCI6MTcwOTIzMzQxNiwiZXhwIjoxNzA5MzE5ODE2fQ.AifdGJewaXsoJqvsOy7j4b2Q9MpNGGoeclHNfStrHHc",
+										"type": "text",
+										"uuid": "8a963f78-3e3b-42b2-9616-a3b367046496"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"fullName\": \"Nara Cyntia Marquez\",\n  \"mail\": \"{{$randomEmail}}\",\n  \"password\": \"1234@Test\",\n  \"accessProfile\": \"ADMIN\",\n  \"cpf\": \"{{randomNumber}}\",\n  \"confirmPassword\": \"1234@Test123456780123456789\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/user/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CT-0017 - Confirmar Senha obrigatório",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Gerar um número aleatório com 11 dígitos\r",
+											"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
+											"\r",
+											"// Converter para string\r",
+											"var randomString = randomNumber.toString();\r",
+											"\r",
+											"// Definir a variável de ambiente com o número gerado\r",
+											"pm.environment.set(\"randomNumber\", randomString);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Status code senha has string\", function () {\r",
+											"    pm.response.to.have.status(\"Created\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"uuid": "0b2846d6-2e32-4512-b253-4f73b9e36c5f"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"uuid": "38b6d9a3-c6e8-4501-b6b6-7ff5ba3dcd9e"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGU3ZjBlMTZiYmU3M2VkMWUxYzEiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRZWWpPM1d3ZlgwOHROMHJTWkQ1UVVlWW0wb2h1cGJCTkdzZnFUc3hnUHdIalMyYnFvcGR1eSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjM0OjIzIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBlN2YwZTE2YmJlNzNlZDFlMWMyIn1dLCJfX3YiOjAsImlhdCI6MTcwOTIzMzQxNiwiZXhwIjoxNzA5MzE5ODE2fQ.AifdGJewaXsoJqvsOy7j4b2Q9MpNGGoeclHNfStrHHc",
+										"type": "text",
+										"uuid": "07af9020-8f32-410e-8147-99afefbf2fd6"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"fullName\": \"Nara Cyntia Marquez\",\n  \"mail\": \"{{$randomEmail}}\",\n  \"password\": \"1234@Test\",\n  \"accessProfile\": \"ADMIN\",\n  \"cpf\": \"{{randomNumber}}\",\n  \"confirmPassword\": \"1234@Test\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/user/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CT-0018 - Campo email obrigatorio",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Gerar um número aleatório com 11 dígitos\r",
+											"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
+											"\r",
+											"// Converter para string\r",
+											"var randomString = randomNumber.toString();\r",
+											"\r",
+											"// Definir a variável de ambiente com o número gerado\r",
+											"pm.environment.set(\"randomNumber\", randomString);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Campo obrigatorio\", function(){\r",
+											"    pm.expect(pm.response.json().error).to.eql([\"O e-mail informado é inválido. Informe um e-mail no formato [nome@domínio.com].\"])\r",
+											"\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"uuid": "da448cbc-6b34-4d16-a838-8b5003edc910"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"uuid": "46eab89f-984c-4492-a098-b85c3d051a8c"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGU3ZjBlMTZiYmU3M2VkMWUxYzEiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRZWWpPM1d3ZlgwOHROMHJTWkQ1UVVlWW0wb2h1cGJCTkdzZnFUc3hnUHdIalMyYnFvcGR1eSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjM0OjIzIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBlN2YwZTE2YmJlNzNlZDFlMWMyIn1dLCJfX3YiOjAsImlhdCI6MTcwOTIzMzQxNiwiZXhwIjoxNzA5MzE5ODE2fQ.AifdGJewaXsoJqvsOy7j4b2Q9MpNGGoeclHNfStrHHc",
+										"type": "text",
+										"uuid": "81c73168-4f27-437f-be2d-a87fd91d15c8"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"fullName\": \"{{FullName}}\",\n  \"mail\": \" \",\n  \"password\": \"1234@Test\",\n  \"accessProfile\": \"ADMIN\",\n  \"cpf\": \"{{randomNumber}}\",\n  \"confirmPassword\": \"1234@Test\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/user/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CT-0021 - Validar que não há espaços no campo email.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Campo obrigatorio\", function(){\r",
+											"    pm.expect(pm.response.json().error).to.eql([\"O e-mail informado é inválido. Informe um e-mail no formato [nome@domínio.com].\"])\r",
+											"\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"{{FullName}}\",\r\n  \"mail\": \"123 4@Test.com\",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{randomNumber}}\",\r\n  \"confirmPassword\": \"1234@Test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Lista de cadastro de login",
+			"item": [
+				{
+					"name": "Teste de sucesso",
+					"item": [
+						{
+							"name": "Criando usuario",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.variables.replaceIn('{{$randomEmail}}')\r",
+											"\r",
+											"// Gerar um número aleatório com 11 dígitos\r",
+											"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
+											"\r",
+											"// Converter para string\r",
+											"var randomString = randomNumber.toString();\r",
+											"\r",
+											"// Definir a variável de ambiente com o número gerado\r",
+											"pm.environment.set(\"randomNumber\", randomString);\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const responseData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Save user ID to environment variable\", function () {\r",
+											"    pm.expect(responseData.user._id).to.exist;\r",
+											"    pm.environment.set(\"IdUser\", responseData.user._id);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"uuid": "6f445229-bb0a-4201-bbbf-3c3ca8d3d750"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"uuid": "ca21b660-885b-4d12-9c63-1caaa7bd2206"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGU3ZjBlMTZiYmU3M2VkMWUxYzEiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRZWWpPM1d3ZlgwOHROMHJTWkQ1UVVlWW0wb2h1cGJCTkdzZnFUc3hnUHdIalMyYnFvcGR1eSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjM0OjIzIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBlN2YwZTE2YmJlNzNlZDFlMWMyIn1dLCJfX3YiOjAsImlhdCI6MTcwOTIzMzQxNiwiZXhwIjoxNzA5MzE5ODE2fQ.AifdGJewaXsoJqvsOy7j4b2Q9MpNGGoeclHNfStrHHc",
+										"type": "text",
+										"uuid": "857b397f-44eb-4500-8b29-85878cfa1037"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"fullName\": \"Luiza Marquez Barcelos Fernandes\",\n  \"mail\": \"{{$randomEmail}}\",\n  \"password\": \"1234@Test\",\n  \"accessProfile\": \"ADMIN\",\n  \"cpf\": \"{{randomNumber}}\",\n  \"confirmPassword\": \"1234@Test\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/user/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "contagem de usuarios",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.variables.replaceIn('{{$randomEmail}}')\r",
+											"\r",
+											"// Gerar um número aleatório com 11 dígitos\r",
+											"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
+											"\r",
+											"// Converter para string\r",
+											"var randomString = randomNumber.toString();\r",
+											"\r",
+											"// Definir a variável de ambiente com o número gerado\r",
+											"pm.environment.set(\"randomNumber\", randomString);\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "value",
+											"value": "{{novotoken}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"uuid": "d73b3fd0-cc10-4bcd-8250-0329e53bc7e9"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"uuid": "13ada98a-199b-49f8-825c-3e8143eb21be"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGU3ZjBlMTZiYmU3M2VkMWUxYzEiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRZWWpPM1d3ZlgwOHROMHJTWkQ1UVVlWW0wb2h1cGJCTkdzZnFUc3hnUHdIalMyYnFvcGR1eSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjM0OjIzIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBlN2YwZTE2YmJlNzNlZDFlMWMyIn1dLCJfX3YiOjAsImlhdCI6MTcwOTIzMzQxNiwiZXhwIjoxNzA5MzE5ODE2fQ.AifdGJewaXsoJqvsOy7j4b2Q9MpNGGoeclHNfStrHHc",
+										"type": "text",
+										"uuid": "50aeec22-8bbb-4e35-9d37-8107909e0ada"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/api/user/count",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"count"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lista de usuarios",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "value",
+											"value": "{{novotoken}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"uuid": "332d67e1-8174-4b90-8f11-b62fad123a0b"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busca de usuario pelo Id",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "value",
+											"value": "{{novotoken}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"uuid": "a1aee2b7-aaaf-46e0-9dbd-2fda89d7efa1"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/{{IdUser}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"{{IdUser}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Excluir cadastro",
+			"item": [
+				{
+					"name": "Cadastro novo user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Gerar um número aleatório com 11 dígitos\r",
+									"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
+									"\r",
+									"// Converter para string\r",
+									"var randomString = randomNumber.toString();\r",
+									"\r",
+									"// Definir a variável de ambiente com o número gerado\r",
+									"pm.environment.set(\"randomNumber\", randomString);\r",
+									"\r",
+									"\r",
+									"function firstName() {\r",
+									" var firstName = [\"Nara\", \"Cyntia\", \"Fabiano\", \"Mara\", \"Rubia\", \"Flavia\", \"Nubia\", \"Lucielle\", \"Aparecida\", \"Rodrigo\", \"Jose\", \"Kelly\", \"Cristina\", \"Luciana\", \"Lana\", \"Marcia\", \"Luiz\", \"Marcio\", \"Iraides\", \"Ana\", \"Pedro\", \"Maria\", \"João\",\r",
+									" \"Mariana\", \"Lucas\", \"Carla\", \"Gustavo\", \"Juliana\", \"Rafael\"];\r",
+									" var randomItem = firstName[Math.floor(Math.random() * firstName.length)];\r",
+									" return randomItem;\r",
+									"\r",
+									"}\r",
+									"pm.environment.set(\"FirstName\", firstName());\r",
+									"\r",
+									"\r",
+									"function lastName() {\r",
+									" var lastName = [\"Silva\", \"Marquez\", \"Gonçalves\", \"Santos\", \"Bueno\", \"Danesi\", \"Arruda\", \"Cardoso\", \"Fonseca\", \"Smith\", \"Pascoalle\", \"Marques\"];\r",
+									" var randomItem = lastName[Math.floor(Math.random() * lastName.length)];\r",
+									" return randomItem;\r",
+									"\r",
+									"}\r",
+									"pm.environment.set(\"LastName\", lastName());\r",
+									"\r",
+									"\r",
+									"pm.environment.set(\"FullName\", pm.variables.get(\"FirstName\") + \" \" + pm.variables.get(\"LastName\"));\r",
+									"\r",
+									"pm.environment.set(\"Email\", pm.variables.replaceIn('{{$randomEmail}}'));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code name has string\", function () {\r",
+									"    pm.response.to.have.status(\"Created\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json",
+								"uuid": "3d8b3d26-bc82-4669-9af6-0619fd37aa60"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"uuid": "849dd95b-d2a7-4b9a-b8be-b83e1cddca6c"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGU3ZjBlMTZiYmU3M2VkMWUxYzEiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRZWWpPM1d3ZlgwOHROMHJTWkQ1UVVlWW0wb2h1cGJCTkdzZnFUc3hnUHdIalMyYnFvcGR1eSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjM0OjIzIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBlN2YwZTE2YmJlNzNlZDFlMWMyIn1dLCJfX3YiOjAsImlhdCI6MTcwOTIzMzQxNiwiZXhwIjoxNzA5MzE5ODE2fQ.AifdGJewaXsoJqvsOy7j4b2Q9MpNGGoeclHNfStrHHc",
+								"uuid": "f150948c-9862-4023-a7b7-9c719974a11a"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fullName\": \"{{FullName}}\",\n  \"mail\": \"{{Email}}\",\n  \"password\": \"1234@Test\",\n  \"accessProfile\": \"ADMIN\",\n  \"cpf\": \"{{randomNumber}}\",\n  \"confirmPassword\": \"1234@Test\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/user/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar usuario",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Gerar um número aleatório com 11 dígitos\r",
+									"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
+									"\r",
+									"// Converter para string\r",
+									"var randomString = randomNumber.toString();\r",
+									"\r",
+									"// Definir a variável de ambiente com o número gerado\r",
+									"pm.environment.set(\"randomNumber\", randomString);\r",
+									"\r",
+									"\r",
+									"const requestOptions = {\r",
+									"    url: `https://qualitys-hunters.qacoders-academy.com.br/api/user/count?tokenAdm=${pm.environment.get('tokenAdm')}`,\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'accept': 'application/json',\r",
+									"        'Content-Type': 'application/json'\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"             fullName: pm.environment.get('fullName'),\r",
+									"             mail: pm.environment.get('mail'),\r",
+									"             password: \"1234@Test\",\r",
+									"             accessProfile: pm.environment.get('ADMIN'),\r",
+									"             cpf: pm.environment.get('randomNumber'),\r",
+									"             confirmPassword: \"1234@Test\",\r",
+									"\r",
+									"        })\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.sendRequest(requestOptions, function (err, response) {\r",
+									"    console.log(err ? err : response.json());\r",
+									"    if (!err) {\r",
+									"        responseBody = pm.response.json();\r",
+									"        pm.environment.set(\"_id\", responseBody._id);\r",
+									"\r",
+									"        // Exemplo: configurar uma variável de ambiente com um valor da resposta\r",
+									"        const responseData = response.json();\r",
+									"        // Supondo que a resposta tenha um id, ajuste conforme a sua resposta real\r",
+									"        console.log(\"_id:\"+responseData._id);\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"msg\", function(){",
+									"    pm.expect(pm.response.json().msg).to.eql(\"Usuário deletado com sucesso!.\")",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json",
+								"uuid": "38132b74-c9c3-4050-8013-e8a95bd0c2bc"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"uuid": "6a302c04-5c96-48b9-9fbd-8b9591bae9df"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGU3ZjBlMTZiYmU3M2VkMWUxYzEiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRZWWpPM1d3ZlgwOHROMHJTWkQ1UVVlWW0wb2h1cGJCTkdzZnFUc3hnUHdIalMyYnFvcGR1eSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjM0OjIzIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBlN2YwZTE2YmJlNzNlZDFlMWMyIn1dLCJfX3YiOjAsImlhdCI6MTcwOTIzMzQxNiwiZXhwIjoxNzA5MzE5ODE2fQ.AifdGJewaXsoJqvsOy7j4b2Q9MpNGGoeclHNfStrHHc",
+								"uuid": "4d5679e8-05ca-4b01-8716-6aaa2444ec52"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/user/{{_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"{{_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CT-0001 - Validar se o cadastro foi deletado",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"alert\", function(){\r",
+									"    pm.expect(pm.response.json().alert).to.eql([\"Esse usuário não existe em nossa base de dados.\"])\r",
+									"\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json",
+								"uuid": "cb60b30a-d5c9-4c66-ba3c-c1a94fc258be"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"uuid": "5d1b590e-4068-4e98-bd37-fef56437ba0b"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGU3ZjBlMTZiYmU3M2VkMWUxYzEiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRZWWpPM1d3ZlgwOHROMHJTWkQ1UVVlWW0wb2h1cGJCTkdzZnFUc3hnUHdIalMyYnFvcGR1eSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjM0OjIzIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBlN2YwZTE2YmJlNzNlZDFlMWMyIn1dLCJfX3YiOjAsImlhdCI6MTcwOTIzMzQxNiwiZXhwIjoxNzA5MzE5ODE2fQ.AifdGJewaXsoJqvsOy7j4b2Q9MpNGGoeclHNfStrHHc",
+								"uuid": "8a953c27-c804-4f00-8d6b-37675a4bb6c8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/user/66398dbbac37ede4bdf5cbeb",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"66398dbbac37ede4bdf5cbeb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CT-0003 - Validar se houve atualização da lista após exclusão",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"alert\", function(){\r",
+									"    pm.expect(pm.response.json().alert).to.eql([\"Esse usuário não existe em nossa base de dados.\"])\r",
+									"\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json",
+								"uuid": "6beb1177-e91c-4cb2-8021-c98a93fa0ed9"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"uuid": "a8783df1-5500-4bb2-9a9e-55f056283d42"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGU3ZjBlMTZiYmU3M2VkMWUxYzEiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRZWWpPM1d3ZlgwOHROMHJTWkQ1UVVlWW0wb2h1cGJCTkdzZnFUc3hnUHdIalMyYnFvcGR1eSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjM0OjIzIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBlN2YwZTE2YmJlNzNlZDFlMWMyIn1dLCJfX3YiOjAsImlhdCI6MTcwOTIzMzQxNiwiZXhwIjoxNzA5MzE5ODE2fQ.AifdGJewaXsoJqvsOy7j4b2Q9MpNGGoeclHNfStrHHc",
+								"uuid": "e9bfcdb0-5fb6-4d51-8740-a26dbe8f80a3"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/user/66398dbbac37ede4bdf5cbeb",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"66398dbbac37ede4bdf5cbeb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CT-0003 - Validar se houve atualização da lista após exclusão",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"menssagem de alerta\", function(){\r",
+									"    pm.expect(pm.response.json().alert[0]).to.eql(\"Esse usuário não existe em nossa base de dados.\");\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/66398dbbac37ede4bdf5cbeb",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"66398dbbac37ede4bdf5cbeb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista user count",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"//ANTES\r",
+									" \r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									" \r",
+									"var responseBody = pm.response.json();\r",
+									"if (responseBody && responseBody.count) {\r",
+									"    pm.environment.set(\"count\", responseBody.count);\r",
+									"}\r",
+									" \r",
+									"\r",
+									"//DEPOIS\r",
+									" \r",
+									"pm.test('Status code is 200', function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									" \r",
+									"var responseBody = pm.response.json();\r",
+									"var countAfter = responseBody.count;\r",
+									"var count = pm.environment.get(\"count\");\r",
+									"pm.environment.set(\"countAfter\", countAfter);\r",
+									" \r",
+									"pm.test('Teste de contagem pós criação', function() {\r",
+									"    pm.expect(countAfter).to.eql(count);\r",
+									"});\r",
+									" \r",
+									"console.log(count);\r",
+									"console.log(countAfter);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{novotoken}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/count",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retornar 50 registros",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response body is in application/json format\", function () {",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+									"});",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{novotoken}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json",
+								"uuid": "41196ccd-a4c1-4b4a-a22b-44d54c7fe049"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user/?limit=50",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								""
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Editar Cadastro de login",
+			"item": [
+				{
+					"name": "Criando novo Login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.variables.replaceIn('{{$randomEmail}}')\r",
+									"\r",
+									"// Gerar um número aleatório com 11 dígitos\r",
+									"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
+									"\r",
+									"// Converter para string\r",
+									"var randomString = randomNumber.toString();\r",
+									"\r",
+									"// Definir a variável de ambiente com o número gerado\r",
+									"pm.environment.set(\"randomNumber\", randomString);\r",
+									"\r",
+									"\r",
+									"function firstName() {\r",
+									" var firstName = [\"Nara\", \"Cyntia\", \"Fabiano\", \"Mara\", \"Rubia\", \"Flavia\", \"Nubia\", \"Lucielle\", \"Aparecida\", \"Rodrigo\", \"Jose\", \"Kelly\", \"Cristina\", \"Luciana\", \"Lana\", \"Marcia\", \"Luiz\", \"Marcio\", \"Iraides\", \"Ana\", \"Pedro\", \"Maria\", \"João\",\r",
+									" \"Mariana\", \"Lucas\", \"Carla\", \"Gustavo\", \"Juliana\", \"Rafael\"];\r",
+									" var randomItem = firstName[Math.floor(Math.random() * firstName.length)];\r",
+									" return randomItem;\r",
+									"\r",
+									"}\r",
+									"pm.environment.set(\"FirstName\", firstName());\r",
+									"\r",
+									"\r",
+									"function lastName() {\r",
+									" var lastName = [\"Silva\", \"Marquez\", \"Gonçalves\", \"Santos\", \"Bueno\", \"Danesi\", \"Arruda\", \"Cardoso\", \"Fonseca\", \"Smith\", \"Pascoalle\", \"Marques\"];\r",
+									" var randomItem = lastName[Math.floor(Math.random() * lastName.length)];\r",
+									" return randomItem;\r",
+									"\r",
+									"}\r",
+									"pm.environment.set(\"LastName\", lastName());\r",
+									"\r",
+									"pm.environment.set(\"FullName\", pm.variables.get(\"FirstName\") + \" \" + pm.variables.get(\"LastName\"));\r",
+									"\r",
+									"\r",
+									"pm.environment.set(\"Email\", pm.variables.replaceIn('{{$randomEmail}}'));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fullName\": \"{{FullName}}\",\r\n  \"mail\": \"{{Email}}\",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{randomNumber}}\",\r\n  \"confirmPassword\": \"1234@Test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login novo user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"Email\", pm.variables.replaceIn('{{$randomEmail}}'));\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mail\": \"Bennett_King99@hotmail.com\",\r\n    \"password\": \"1234@Test\"\r\n  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Gerar um número aleatório com 11 dígitos\r",
+									"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
+									"\r",
+									"// Converter para string\r",
+									"var randomString = randomNumber.toString();\r",
+									"\r",
+									"// Definir a variável de ambiente com o número gerado\r",
+									"pm.environment.set(\"randomNumber\", randomString);\r",
+									"\r",
+									"\r",
+									"pm.environment.set(\"Email\", pm.variables.replaceIn('{{$randomEmail}}'));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{novotoken}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fullName\": \"TesTe Nara NLogin\",\r\n  \"mail\": \"{{Email}}\",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{randomNumber}}\",\r\n  \"confirmPassword\": \"1234@Test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user/{{IdUser}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"{{IdUser}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CT-0011 - Senha - enviar com 13 caracteres - regra de excessão",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.variables.replaceIn('{{$randomEmail}}')\r",
+									"\r",
+									"// Gerar um número aleatório com 11 dígitos\r",
+									"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
+									"\r",
+									"// Converter para string\r",
+									"var randomString = randomNumber.toString();\r",
+									"\r",
+									"// Definir a variável de ambiente com o número gerado\r",
+									"pm.environment.set(\"randomNumber\", randomString);\r",
+									"\r",
+									"\r",
+									"pm.environment.set(\"Email\", pm.variables.replaceIn('{{$randomEmail}}'));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Dados atualizados com sucesso\", function () {",
+									"    pm.expect(pm.response.json().msg).to.equal(\"Dados atualizados com sucesso!\");",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{novotoken}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json",
+								"uuid": "27b74eb3-8870-4cdb-8b75-cfb39f43c0fa"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"uuid": "e0f9a4cd-5599-4933-bbdf-fbc0ad5bfe23"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGU3ZjBlMTZiYmU3M2VkMWUxYzEiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRZWWpPM1d3ZlgwOHROMHJTWkQ1UVVlWW0wb2h1cGJCTkdzZnFUc3hnUHdIalMyYnFvcGR1eSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjM0OjIzIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBlN2YwZTE2YmJlNzNlZDFlMWMyIn1dLCJfX3YiOjAsImlhdCI6MTcwOTIzMzQxNiwiZXhwIjoxNzA5MzE5ODE2fQ.AifdGJewaXsoJqvsOy7j4b2Q9MpNGGoeclHNfStrHHc",
+								"uuid": "b4e2284b-7255-47bb-b6c5-2a9092932186"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"fullName\": \"{{FullName}}\",\n   \"mail\": \"{{Email}}\",\n   \"password\": \"1234@Testhj1980102192125\",\n   \"accessProfile\": \"ADMIN\",\n   \"cpf\": \"{{randomNumber}}\",\n   \"confirmPassword\": \"1234@Testhj1980102192125\"\n\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/user/{{UserId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"{{UserId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CT-0012 - Senha - Deve conter menos uma letra maiúscula, minúscula, caractere especial e números",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Gerar um número aleatório com 11 dígitos\r",
+									"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
+									"\r",
+									"// Converter para string\r",
+									"var randomString = randomNumber.toString();\r",
+									"\r",
+									"// Definir a variável de ambiente com o número gerado\r",
+									"pm.environment.set(\"randomNumber\", randomString);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code is 200', function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"password is change\", function () {\r",
+									"    var responseJSON = pm.response.json();\r",
+									"    pm.expect(responseJSON).to.be.an('object');\r",
+									"    pm.expect(responseJSON.updatedUser.mail).to.exist.and.to.not.equal(\"1234@Test1\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{novotoken}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json",
+								"uuid": "9f0e3a84-71e3-40e9-900c-6673ad6bb8a0"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"uuid": "1d6ab8d1-2c5e-4588-a771-56f12213aa1a"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGU3ZjBlMTZiYmU3M2VkMWUxYzEiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRZWWpPM1d3ZlgwOHROMHJTWkQ1UVVlWW0wb2h1cGJCTkdzZnFUc3hnUHdIalMyYnFvcGR1eSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjM0OjIzIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBlN2YwZTE2YmJlNzNlZDFlMWMyIn1dLCJfX3YiOjAsImlhdCI6MTcwOTIzMzQxNiwiZXhwIjoxNzA5MzE5ODE2fQ.AifdGJewaXsoJqvsOy7j4b2Q9MpNGGoeclHNfStrHHc",
+								"type": "text",
+								"uuid": "f2de9ef5-78cf-42e7-b6dd-9234d90f098a"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fullName\": \"Nara Cyntia Marquez\",\n  \"mail\": \"{{$randomEmail}}\",\n  \"password\": \"1234@TestPUT\",\n  \"accessProfile\": \"ADMIN\",\n  \"cpf\": \"{{randomNumber}}\",\n  \"confirmPassword\": \"1234@TestPUT\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/user/{{UserId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"{{UserId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CT-0014 - Editar Senha - campo vazio",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Gerar um número aleatório com 11 dígitos\r",
+									"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
+									"\r",
+									"// Converter para string\r",
+									"var randomString = randomNumber.toString();\r",
+									"\r",
+									"// Definir a variável de ambiente com o número gerado\r",
+									"pm.environment.set(\"randomNumber\", randomString);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Error message is correct\", function(){",
+									"    pm.expect(pm.response.json().error).to.eql([",
+									"        \"Invalid value\",",
+									"       \"Senha precisa ter: uma letra maiúscula, uma letra minúscula, um número, um caractere especial(@#$%) e tamanho entre 8-12.\",",
+									"         \"As senhas não coincidem.\"",
+									"    ]);",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{novotoken}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json",
+								"uuid": "1c7e111e-1531-443a-8209-507d9a045ca9"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"uuid": "12025904-0e31-4668-866f-ee729ce3cac0"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGU3ZjBlMTZiYmU3M2VkMWUxYzEiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRZWWpPM1d3ZlgwOHROMHJTWkQ1UVVlWW0wb2h1cGJCTkdzZnFUc3hnUHdIalMyYnFvcGR1eSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjM0OjIzIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBlN2YwZTE2YmJlNzNlZDFlMWMyIn1dLCJfX3YiOjAsImlhdCI6MTcwOTIzMzQxNiwiZXhwIjoxNzA5MzE5ODE2fQ.AifdGJewaXsoJqvsOy7j4b2Q9MpNGGoeclHNfStrHHc",
+								"type": "text",
+								"uuid": "225f8b7f-e028-4489-8a48-28e63a8d4405"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n  \"password\": \" \",\n  \"confirmPassword\": \"1234@Test\"\n}\n\n"
+						},
+						"url": {
+							"raw": "{{url}}/api/user/password/{{UserId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"password",
+								"{{UserId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CT-0019 - Campo nome Completo dever conter no mínimo duas palavras compostas - Nome e Sobrenome",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.variables.replaceIn('{{$randomEmail}}')\r",
+									"\r",
+									"// Gerar um número aleatório com 11 dígitos\r",
+									"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
+									"\r",
+									"// Converter para string\r",
+									"var randomString = randomNumber.toString();\r",
+									"\r",
+									"// Definir a variável de ambiente com o número gerado\r",
+									"pm.environment.set(\"randomNumber\", randomString);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Dados atualizados com sucesso!\", function () {\r",
+									"    pm.expect(pm.response.json().msg).to.equal(\"Dados atualizados com sucesso!\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{novotoken}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json",
+								"uuid": "58017e24-8b72-45f3-a7d0-3c33efbb7b18"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"uuid": "14203580-529d-42d0-b8e5-c8947e2c30cd"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGU3ZjBlMTZiYmU3M2VkMWUxYzEiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRZWWpPM1d3ZlgwOHROMHJTWkQ1UVVlWW0wb2h1cGJCTkdzZnFUc3hnUHdIalMyYnFvcGR1eSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjM0OjIzIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBlN2YwZTE2YmJlNzNlZDFlMWMyIn1dLCJfX3YiOjAsImlhdCI6MTcwOTIzMzQxNiwiZXhwIjoxNzA5MzE5ODE2fQ.AifdGJewaXsoJqvsOy7j4b2Q9MpNGGoeclHNfStrHHc",
+								"uuid": "e013fe5c-28cf-4166-bb57-abd97a748426"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fullName\": \"Teste Nara Edite\",\n  \"mail\": \"testenaralogin0@qacoders.com\",\n  \"password\": \"1234@Test\",\n  \"accessProfile\": \"ADMIN\",\n  \"cpf\": \"{{randomNumber}}\",\n  \"confirmPassword\": \"1234@Test\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/user/{{UserId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"{{UserId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CT-0020 - Edite Email no formato domínios validos.",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.variables.replaceIn('{{$randomEmail}}')\r",
+									"\r",
+									"// Gerar um número aleatório com 11 dígitos\r",
+									"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
+									"\r",
+									"// Converter para string\r",
+									"var randomString = randomNumber.toString();\r",
+									"\r",
+									"// Definir a variável de ambiente com o número gerado\r",
+									"pm.environment.set(\"randomNumber\", randomString);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"",
+									"pm.test(\"response mail is change\", function () {",
+									"    var responseJSON = pm.response.json();",
+									"    pm.expect(responseJSON).to.be.an('object');",
+									"    pm.expect(responseJSON.updatedUser.mail).to.exist.and.to.not.equal(\"testenaralogin01@qacoders.com\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{novotoken}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fullName\": \"Teste Nara NLogin\",\r\n  \"mail\": \"testenaralogin44@qacoders.com\",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{randomNumber}}\",\r\n  \"confirmPassword\": \"1234@Test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user/{{UserId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"{{UserId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CT-0022 - Campo email vazio",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.variables.replaceIn('{{$randomEmail}}')\r",
+									"\r",
+									"// Gerar um número aleatório com 11 dígitos\r",
+									"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
+									"\r",
+									"// Converter para string\r",
+									"var randomString = randomNumber.toString();\r",
+									"\r",
+									"// Definir a variável de ambiente com o número gerado\r",
+									"pm.environment.set(\"randomNumber\", randomString);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code is 400', function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"mail is Null\", function () {",
+									"    pm.expect(pm.response.text()).to.not.include(\"is Null\");",
+									"});",
+									"",
+									"pm.test(\"Campo email vazio é inválido\", function () {",
+									"    pm.expect(pm.response.json().error[0]).to.equal(\"O e-mail informado é inválido. Informe um e-mail no formato [nome@domínio.com].\");",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{novotoken}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fullName\": \"Teste Nara NLogin\",\r\n  \"mail\": \" \",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{randomNumber}}\",\r\n  \"confirmPassword\": \"1234@Test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user/{{UserId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"{{UserId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atualizar a senha de um usuário passando o id.",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.variables.replaceIn('{{$randomEmail}}')\r",
+									"\r",
+									"// Gerar um número aleatório com 11 dígitos\r",
+									"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
+									"\r",
+									"// Converter para string\r",
+									"var randomString = randomNumber.toString();\r",
+									"\r",
+									"// Definir a variável de ambiente com o número gerado\r",
+									"pm.environment.set(\"randomNumber\", randomString);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code is 200', function () {",
+									"    pm.response.to.have.status(200);",
+									"})",
+									"",
+									"pm.test(\"senha alterada com sucesso\", function () {",
+									"    var responseJSON = pm.response.json();",
+									"    pm.expect(responseJSON).to.be.an('object');",
+									"    pm.expect(responseJSON.msg).to.exist.and.to.not.equal(\"1234@Testhj1603\");",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{novotoken}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"password\": \"1234@Testhj0\",\r\n\"confirmPassword\": \"1234@Testhj0\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user/password/{{IdUser}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"password",
+								"{{IdUser}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atualizar o status de um usuário passando o id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code is 200', function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Status do usuario atualizado com sucesso\", function () {\r",
+									"    var responseJSON = pm.response.json();\r",
+									"    pm.expect(responseJSON).to.be.an('object');\r",
+									"    pm.expect(responseJSON.msg).to.exist.and.to.not.equal(\"true\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{novotoken}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"status\": false\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user/status/{{UserId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"status",
+								"{{UserId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "in",
+				"value": "query",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "{{token}}",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "token",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://a-super-maquina.qacoders-academy.com.br"
+		}
+	]
+}
