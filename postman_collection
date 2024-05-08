@@ -1537,7 +1537,12 @@
 									"\r",
 									"pm.environment.set(\"FullName\", pm.variables.get(\"FirstName\") + \" \" + pm.variables.get(\"LastName\"));\r",
 									"\r",
-									"pm.environment.set(\"Email\", pm.variables.replaceIn('{{$randomEmail}}'));"
+									"pm.environment.set(\"Email\", pm.variables.replaceIn('{{$randomEmail}}'));\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -1636,18 +1641,6 @@
 									"    }\r",
 									"};\r",
 									"\r",
-									"pm.sendRequest(requestOptions, function (err, response) {\r",
-									"    console.log(err ? err : response.json());\r",
-									"    if (!err) {\r",
-									"        responseBody = pm.response.json();\r",
-									"        pm.environment.set(\"_id\", responseBody._id);\r",
-									"\r",
-									"        // Exemplo: configurar uma variável de ambiente com um valor da resposta\r",
-									"        const responseData = response.json();\r",
-									"        // Supondo que a resposta tenha um id, ajuste conforme a sua resposta real\r",
-									"        console.log(\"_id:\"+responseData._id);\r",
-									"    }\r",
-									"});\r",
 									"\r",
 									"\r",
 									"\r",
@@ -1661,9 +1654,15 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"msg\", function(){",
-									"    pm.expect(pm.response.json().msg).to.eql(\"Usuário deletado com sucesso!.\")",
-									"})"
+									"pm.test(\"Esse usuário não existe em nossa base de dados.\", function(){",
+									"    pm.expect(pm.response.json().alert[0]).to.eql(\"Esse usuário não existe em nossa base de dados.\");",
+									"})",
+									"",
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -1694,14 +1693,14 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{url}}/api/user/{{_id}}",
+							"raw": "{{url}}/api/user/{{IdUser}}",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"user",
-								"{{_id}}"
+								"{{IdUser}}"
 							]
 						}
 					},
@@ -1724,11 +1723,15 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"alert\", function(){\r",
+									"pm.test(\"Esse usuário não existe em nossa base de dados.\", function(){\r",
 									"    pm.expect(pm.response.json().alert).to.eql([\"Esse usuário não existe em nossa base de dados.\"])\r",
 									"\r",
 									"})\r",
-									""
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -1844,7 +1847,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"menssagem de alerta\", function(){\r",
+									"pm.test(\"Esse usuário não existe em nossa base de dados.\", function(){\r",
 									"    pm.expect(pm.response.json().alert[0]).to.eql(\"Esse usuário não existe em nossa base de dados.\");\r",
 									"})\r",
 									"\r",
@@ -2331,14 +2334,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/user/{{IdUser}}",
+							"raw": "{{url}}/api/user/{{UserId}}",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"user",
-								"{{IdUser}}"
+								"{{UserId}}"
 							]
 						}
 					},
@@ -2993,7 +2996,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/user/password/{{IdUser}}",
+							"raw": "{{url}}/api/user/password/{{UserId}}",
 							"host": [
 								"{{url}}"
 							],
@@ -3001,7 +3004,7 @@
 								"api",
 								"user",
 								"password",
-								"{{IdUser}}"
+								"{{UserId}}"
 							]
 						}
 					},
