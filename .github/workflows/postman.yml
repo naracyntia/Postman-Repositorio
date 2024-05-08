@@ -35,3 +35,13 @@ jobs:
       - name: Etapa 2 Install Newman-Reporter-Htmlextra
         run: sudo npm install -g newman-reporter-htmlextra  && npm i -g newman 
             
+      # Runs a set of command using the runners shell
+      - name: Etapa 3 Execute collection
+        run: newman run ./postman_collection.json" -e  --reporters cli, -r htmlextra --reporter-htmlextra-export ./results/Report.html --reporter-htmlextra-title "Teste Posman QH" 
+
+      # Runs a set of command using the runners shell
+      - name: Etapa 4 Archive production artifacts
+        uses: actions/upload-artifact@v4
+        with:
+             name: report
+             path: ./results/Report.html
