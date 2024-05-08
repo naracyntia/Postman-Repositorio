@@ -37,7 +37,7 @@ jobs:
             
       # Runs a set of command using the runners shell
       - name: Etapa 3 Execute collection
-        run: newman run ./postman_collection.json" -e  --reporters cli, -r htmlextra --reporter-htmlextra-export ./results/Report.html --reporter-htmlextra-title "Teste Posman QH" 
+        run: newman run ./postman_collection.json -e  --reporters cli, -r htmlextra --reporter-htmlextra-export ./results/Report.html --reporter-htmlextra-title "Teste Posman QH" 
 
       # Runs a set of command using the runners shell
       - name: Etapa 4 Archive production artifacts
