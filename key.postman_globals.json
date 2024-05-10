@@ -1,0 +1,15 @@
+{
+	"id": "d3232ecf-adff-4f0c-8e03-9046625a5dcd",
+	"values": [
+		{
+			"key": "apikeycli",
+			"value": "PMAK-663d58f634f8f90001dd519d-1656701c7d084ded1210604f53779e21be",
+			"type": "secret",
+			"enabled": true
+		}
+	],
+	"name": "Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2024-05-10T00:27:46.075Z",
+	"_postman_exported_using": "Postman/11.0.11-240508-1536"
+}
