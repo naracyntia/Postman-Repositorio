@@ -44,12 +44,12 @@ jobs:
       - name: Create issue using REST API
         run: |
           curl -X 'POST' \
-          --https://qualitys-hunters.qacoders-academy.com.br/${{ github.repository }}/issues \
+          --https://qualitys-hunters.qacoders-academy.com.br/${{ github.repository }}' \
           --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           --header 'content-type: application/json' \
           --data '{
-            "title": "Automated issue for commit: ${{ github.sha }}",
-            "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_."
+            "mail": "Coleman.Weber82@yahoo.com ${{ github.sha }}",
+            "password": "1234@Test **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_."
             }' \
           --fail
 
