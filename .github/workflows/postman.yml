@@ -40,6 +40,13 @@ jobs:
           npm install -g newman
           sudo npm install -g newman-reporter-htmlextra        
 
+      # passando a variavel token
+      - run: |
+          gh issue --repo ${{ github.repository }} \
+            create --title "Issue title" --body "Issue body"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       # Runs a set of command using the runners shell
       - name: Etapa 03 - Rodando as Collections de Testes
         run: |
