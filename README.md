@@ -39,5 +39,5 @@ Qualitys Hunters
 Cleberson Osorio
 
 ## Participantes
-Nara Cyntia
-Renilson
+- Nara Cyntia
+- Renilson
