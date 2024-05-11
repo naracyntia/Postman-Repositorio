@@ -39,20 +39,7 @@ jobs:
           npm fund
           npm install -g newman
           sudo npm install -g newman-reporter-htmlextra        
-
-      # passando a variavel token
-      - name: Create issue using REST API
-        run: |
-          curl -X 'POST' \
-          --https://qualitys-hunters.qacoders-academy.com.br/${{ github.repository }}' \
-          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-          --header 'content-type: application/json' \
-          --data '{
-            "mail": "Coleman.Weber82@yahoo.com ${{ github.sha }}",
-            "password": "1234@Test **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_."
-            }' \
-          --fail
-
+     
       # Runs a set of command using the runners shell
       - name: Etapa 03 - Rodando as Collections de Testes
         run: |
