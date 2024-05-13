@@ -387,7 +387,7 @@
 										},
 										{
 											"key": "value",
-											"value": "{{novotoken}}",
+											"value": "{{tokenAdm}}",
 											"type": "string"
 										},
 										{
@@ -406,10 +406,6 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
-									},
-									{
-										"key": "Authorization",
-										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGU3ZjBlMTZiYmU3M2VkMWUxYzEiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRZWWpPM1d3ZlgwOHROMHJTWkQ1UVVlWW0wb2h1cGJCTkdzZnFUc3hnUHdIalMyYnFvcGR1eSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjM0OjIzIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBlN2YwZTE2YmJlNzNlZDFlMWMyIn1dLCJfX3YiOjAsImlhdCI6MTcwOTIzMzQxNiwiZXhwIjoxNzA5MzE5ODE2fQ.AifdGJewaXsoJqvsOy7j4b2Q9MpNGGoeclHNfStrHHc"
 									}
 								],
 								"body": {
@@ -446,7 +442,8 @@
 											"// Definir a variável de ambiente com o número gerado\r",
 											"pm.environment.set(\"randomNumber\", randomString);"
 										],
-										"type": "text/javascript"
+										"type": "text/javascript",
+										"packages": {}
 									}
 								},
 								{
@@ -461,7 +458,8 @@
 											"    pm.response.to.have.header(\"Content-Type\");\r",
 											"});"
 										],
-										"type": "text/javascript"
+										"type": "text/javascript",
+										"packages": {}
 									}
 								}
 							],
@@ -470,6 +468,11 @@
 									"type": "apikey",
 									"apikey": [
 										{
+											"key": "value",
+											"value": "{{tokenAdm}}",
+											"type": "string"
+										},
+										{
 											"key": "in",
 											"value": "query",
 											"type": "string"
@@ -477,11 +480,6 @@
 										{
 											"key": "key",
 											"value": "token",
-											"type": "string"
-										},
-										{
-											"key": "value",
-											"value": "{{token}}",
 											"type": "string"
 										}
 									]
@@ -627,7 +625,8 @@
 											"// Definir a variável de ambiente com o número gerado\r",
 											"pm.environment.set(\"randomNumber\", randomString);"
 										],
-										"type": "text/javascript"
+										"type": "text/javascript",
+										"packages": {}
 									}
 								},
 								{
@@ -643,11 +642,32 @@
 											"    pm.response.to.have.status(\"Created\");\r",
 											"});"
 										],
-										"type": "text/javascript"
+										"type": "text/javascript",
+										"packages": {}
 									}
 								}
 							],
 							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenAdm}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -722,6 +742,26 @@
 								}
 							],
 							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenAdm}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -797,6 +837,26 @@
 								}
 							],
 							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenAdm}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -873,13 +933,13 @@
 									"type": "apikey",
 									"apikey": [
 										{
-											"key": "in",
-											"value": "query",
+											"key": "value",
+											"value": "{{tokenAdm}}",
 											"type": "string"
 										},
 										{
-											"key": "value",
-											"value": "{{novotoken}}",
+											"key": "in",
+											"value": "query",
 											"type": "string"
 										},
 										{
@@ -939,7 +999,8 @@
 											"// Definir a variável de ambiente com o número gerado\r",
 											"pm.environment.set(\"randomNumber\", randomString);"
 										],
-										"type": "text/javascript"
+										"type": "text/javascript",
+										"packages": {}
 									}
 								},
 								{
@@ -955,11 +1016,32 @@
 											"    pm.response.to.have.status(\"Created\");\r",
 											"});"
 										],
-										"type": "text/javascript"
+										"type": "text/javascript",
+										"packages": {}
 									}
 								}
 							],
 							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenAdm}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -1112,6 +1194,26 @@
 								}
 							],
 							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenAdm}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -1147,100 +1249,6 @@
 				{
 					"name": "Teste de sucesso",
 					"item": [
-						{
-							"name": "Criando usuario",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"pm.variables.replaceIn('{{$randomEmail}}')\r",
-											"\r",
-											"// Gerar um número aleatório com 11 dígitos\r",
-											"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
-											"\r",
-											"// Converter para string\r",
-											"var randomString = randomNumber.toString();\r",
-											"\r",
-											"// Definir a variável de ambiente com o número gerado\r",
-											"pm.environment.set(\"randomNumber\", randomString);\r",
-											"\r",
-											"\r",
-											""
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"const responseData = pm.response.json();\r",
-											"\r",
-											"pm.test(\"Save user ID to environment variable\", function () {\r",
-											"    pm.expect(responseData.user._id).to.exist;\r",
-											"    pm.environment.set(\"IdUser\", responseData.user._id);\r",
-											"});"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "apikey",
-									"apikey": [
-										{
-											"key": "in",
-											"value": "query",
-											"type": "string"
-										},
-										{
-											"key": "value",
-											"value": "{{novotoken}}",
-											"type": "string"
-										},
-										{
-											"key": "key",
-											"value": "token",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [
-									{
-										"key": "accept",
-										"value": "application/json"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Authorization",
-										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGU3ZjBlMTZiYmU3M2VkMWUxYzEiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRZWWpPM1d3ZlgwOHROMHJTWkQ1UVVlWW0wb2h1cGJCTkdzZnFUc3hnUHdIalMyYnFvcGR1eSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjM0OjIzIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBlN2YwZTE2YmJlNzNlZDFlMWMyIn1dLCJfX3YiOjAsImlhdCI6MTcwOTIzMzQxNiwiZXhwIjoxNzA5MzE5ODE2fQ.AifdGJewaXsoJqvsOy7j4b2Q9MpNGGoeclHNfStrHHc"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"fullName\": \"Luiza Marquez Barcelos Fernandes\",\n  \"mail\": \"{{$randomEmail}}\",\n  \"password\": \"1234@Test\",\n  \"accessProfile\": \"ADMIN\",\n  \"cpf\": \"{{randomNumber}}\",\n  \"confirmPassword\": \"1234@Test\"\n}"
-								},
-								"url": {
-									"raw": "{{url}}/api/user",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"api",
-										"user"
-									]
-								}
-							},
-							"response": []
-						},
 						{
 							"name": "contagem de usuarios",
 							"event": [
@@ -1286,13 +1294,13 @@
 									"type": "apikey",
 									"apikey": [
 										{
-											"key": "in",
-											"value": "query",
+											"key": "value",
+											"value": "{{tokenAdm}}",
 											"type": "string"
 										},
 										{
-											"key": "value",
-											"value": "{{novotoken}}",
+											"key": "in",
+											"value": "query",
 											"type": "string"
 										},
 										{
@@ -1368,13 +1376,13 @@
 									"type": "apikey",
 									"apikey": [
 										{
-											"key": "in",
-											"value": "query",
+											"key": "value",
+											"value": "{{tokenAdm}}",
 											"type": "string"
 										},
 										{
-											"key": "value",
-											"value": "{{novotoken}}",
+											"key": "in",
+											"value": "query",
 											"type": "string"
 										},
 										{
@@ -1446,13 +1454,13 @@
 									"type": "apikey",
 									"apikey": [
 										{
-											"key": "in",
-											"value": "query",
+											"key": "value",
+											"value": "{{tokenAdm}}",
 											"type": "string"
 										},
 										{
-											"key": "value",
-											"value": "{{novotoken}}",
+											"key": "in",
+											"value": "query",
 											"type": "string"
 										},
 										{
@@ -1565,13 +1573,13 @@
 							"type": "apikey",
 							"apikey": [
 								{
-									"key": "in",
-									"value": "query",
+									"key": "value",
+									"value": "{{tokenAdm}}",
 									"type": "string"
 								},
 								{
-									"key": "value",
-									"value": "{{novotoken}}",
+									"key": "in",
+									"value": "query",
 									"type": "string"
 								},
 								{
@@ -1617,7 +1625,6 @@
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
-									"",
 									""
 								],
 								"type": "text/javascript",
@@ -1630,72 +1637,8 @@
 								"exec": [
 									"pm.environment.set(\"Email\", pm.variables.replaceIn('{{$randomEmail}}'));\r",
 									"\r",
+									"\r",
 									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"mail\": \"Bennett_King99@hotmail.com\",\r\n    \"password\": \"1234@Test\"\r\n  \r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/api/user/{{UserId}}",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"user",
-								"{{UserId}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create User",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 201\", function () {\r",
-									"    pm.response.to.have.status(201);\r",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"// Gerar um número aleatório com 11 dígitos\r",
-									"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
-									"\r",
-									"// Converter para string\r",
-									"var randomString = randomNumber.toString();\r",
-									"\r",
-									"// Definir a variável de ambiente com o número gerado\r",
-									"pm.environment.set(\"randomNumber\", randomString);\r",
-									"\r",
-									"\r",
-									"pm.environment.set(\"Email\", pm.variables.replaceIn('{{$randomEmail}}'));"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -1707,13 +1650,13 @@
 							"type": "apikey",
 							"apikey": [
 								{
-									"key": "in",
-									"value": "query",
+									"key": "value",
+									"value": "{{tokenAdm}}",
 									"type": "string"
 								},
 								{
-									"key": "value",
-									"value": "{{novotoken}}",
+									"key": "in",
+									"value": "query",
 									"type": "string"
 								},
 								{
@@ -1727,7 +1670,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"fullName\": \"TesTe Nara NLogin\",\r\n  \"mail\": \"{{Email}}\",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{randomNumber}}\",\r\n  \"confirmPassword\": \"1234@Test\"\r\n}",
+							"raw": "{\r\n    \"mail\": \"Gloria.Cronin@yahoo.com\",\r\n    \"password\": \"1234@Test\"\r\n  \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1735,13 +1678,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/user",
+							"raw": "{{url}}/api/login/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"user"
+								"login",
+								""
 							]
 						}
 					},
@@ -1767,6 +1711,26 @@
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{tokenAdm}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -1846,7 +1810,7 @@
 								},
 								{
 									"key": "value",
-									"value": "{{novotoken}}",
+									"value": "{{token}}",
 									"type": "string"
 								},
 								{
@@ -1865,10 +1829,6 @@
 							{
 								"key": "Content-Type",
 								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGU3ZjBlMTZiYmU3M2VkMWUxYzEiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRZWWpPM1d3ZlgwOHROMHJTWkQ1UVVlWW0wb2h1cGJCTkdzZnFUc3hnUHdIalMyYnFvcGR1eSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjM0OjIzIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBlN2YwZTE2YmJlNzNlZDFlMWMyIn1dLCJfX3YiOjAsImlhdCI6MTcwOTIzMzQxNiwiZXhwIjoxNzA5MzE5ODE2fQ.AifdGJewaXsoJqvsOy7j4b2Q9MpNGGoeclHNfStrHHc"
 							}
 						],
 						"body": {
@@ -1935,13 +1895,13 @@
 							"type": "apikey",
 							"apikey": [
 								{
-									"key": "in",
-									"value": "query",
+									"key": "value",
+									"value": "{{tokenAdm}}",
 									"type": "string"
 								},
 								{
-									"key": "value",
-									"value": "{{novotoken}}",
+									"key": "in",
+									"value": "query",
 									"type": "string"
 								},
 								{
@@ -2031,13 +1991,13 @@
 							"type": "apikey",
 							"apikey": [
 								{
-									"key": "in",
-									"value": "query",
+									"key": "value",
+									"value": "{{tokenAdm}}",
 									"type": "string"
 								},
 								{
-									"key": "value",
-									"value": "{{novotoken}}",
+									"key": "in",
+									"value": "query",
 									"type": "string"
 								},
 								{
@@ -2126,13 +2086,13 @@
 							"type": "apikey",
 							"apikey": [
 								{
-									"key": "in",
-									"value": "query",
+									"key": "value",
+									"value": "{{tokenAdm}}",
 									"type": "string"
 								},
 								{
-									"key": "value",
-									"value": "{{novotoken}}",
+									"key": "in",
+									"value": "query",
 									"type": "string"
 								},
 								{
@@ -2223,13 +2183,13 @@
 							"type": "apikey",
 							"apikey": [
 								{
-									"key": "in",
-									"value": "query",
+									"key": "value",
+									"value": "{{tokenAdm}}",
 									"type": "string"
 								},
 								{
-									"key": "value",
-									"value": "{{novotoken}}",
+									"key": "in",
+									"value": "query",
 									"type": "string"
 								},
 								{
@@ -2313,13 +2273,13 @@
 							"type": "apikey",
 							"apikey": [
 								{
-									"key": "in",
-									"value": "query",
+									"key": "value",
+									"value": "{{tokenAdm}}",
 									"type": "string"
 								},
 								{
-									"key": "value",
-									"value": "{{novotoken}}",
+									"key": "in",
+									"value": "query",
 									"type": "string"
 								},
 								{
@@ -2401,13 +2361,13 @@
 							"type": "apikey",
 							"apikey": [
 								{
-									"key": "in",
-									"value": "query",
+									"key": "value",
+									"value": "{{tokenAdm}}",
 									"type": "string"
 								},
 								{
-									"key": "value",
-									"value": "{{novotoken}}",
+									"key": "in",
+									"value": "query",
 									"type": "string"
 								},
 								{
@@ -2460,8 +2420,8 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test('Status code is 400', function () {\r",
-									"    pm.response.to.have.status(400);\r",
+									"pm.test('Status code is 200', function () {\r",
+									"    pm.response.to.have.status(200);\r",
 									"})\r",
 									"\r",
 									"pm.test(\"Status do usuario atualizado com sucesso\", function () {\r",
@@ -2481,7 +2441,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{novotoken}}",
+									"value": "{{tokenAdm}}",
 									"type": "string"
 								},
 								{
@@ -2930,72 +2890,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "Lista user count",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "apikey",
-							"apikey": [
-								{
-									"key": "in",
-									"value": "query",
-									"type": "string"
-								},
-								{
-									"key": "value",
-									"value": "{{tokenAdm}}",
-									"type": "string"
-								},
-								{
-									"key": "key",
-									"value": "token",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/user/count",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"user",
-								"count"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		}
@@ -3005,7 +2899,7 @@
 		"apikey": [
 			{
 				"key": "value",
-				"value": "{{novotoken}}",
+				"value": "{{tokenAdm}}",
 				"type": "string"
 			},
 			{
@@ -3067,7 +2961,7 @@
 	"variable": [
 		{
 			"key": "url",
-			"value": "https://a-super-maquina.qacoders-academy.com.br"
+			"value": "https://qualitys-hunters.qacoders-academy.com.br"
 		}
 	]
 }
