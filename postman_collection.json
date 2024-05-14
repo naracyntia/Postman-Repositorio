@@ -2494,13 +2494,13 @@
 							"type": "apikey",
 							"apikey": [
 								{
-									"key": "in",
-									"value": "query",
+									"key": "value",
+									"value": "{{token_userid}}",
 									"type": "string"
 								},
 								{
-									"key": "value",
-									"value": "{{novotoken}}",
+									"key": "in",
+									"value": "query",
 									"type": "string"
 								},
 								{
@@ -2603,13 +2603,16 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
 									"pm.test(\"Usuário deletado com sucesso!.\", function(){",
 									"    pm.expect(pm.response.json().msg).to.eql(\"Usuário deletado com sucesso!.\");",
 									"});",
 									"",
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
+									"",
 									"",
 									""
 								],
@@ -2624,7 +2627,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{tokenAdm}}",
+									"value": "{{token_userid}}",
 									"type": "string"
 								},
 								{
@@ -2689,15 +2692,18 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"\r",
 									"pm.test(\"Esse usuário não existe em nossa base de dados.\", function(){\r",
 									"    pm.expect(pm.response.json().alert).to.eql([\"Esse usuário não existe em nossa base de dados.\"])\r",
 									"\r",
 									"})\r",
 									"\r",
 									"\r",
-									"pm.test(\"Status code is 400\", function () {\r",
-									"    pm.response.to.have.status(400);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -2710,7 +2716,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{tokenAdm}}",
+									"value": "{{token_userid}}",
 									"type": "string"
 								},
 								{
@@ -2765,13 +2771,15 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"\r",
 									"pm.test(\"Esse usuário não existe em nossa base de dados.\", function(){\r",
 									"    pm.expect(pm.response.json().alert[0]).to.eql(\"Esse usuário não existe em nossa base de dados.\");\r",
 									"})\r",
 									"\r",
-									"pm.test(\"Status code is 404\", function () {\r",
-									"    pm.response.to.have.status(404);\r",
-									"});\r",
 									""
 								],
 								"type": "text/javascript",
