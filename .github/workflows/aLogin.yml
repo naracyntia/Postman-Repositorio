@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Testes API Postman
+name: Login teste API Postman
 
 # Controls when the workflow will run
 on:
@@ -44,7 +44,8 @@ jobs:
       - name: Etapa 03 - Rodando as Collections de Testes
         run: |
           newman run "aLogin_collection.json" -e "postman_environment.json" --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Postman"
-      # Runs a set of command using the runners shell
+      
+          # Runs a set of command using the runners shell
       - name: Etapa 04 - Salvando o Resultado dos Testes
         uses: actions/upload-artifact@v4
         if: always()
