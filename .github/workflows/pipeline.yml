@@ -43,30 +43,30 @@ jobs:
       # Rodando as Collections de Testes
       - name: Rodando a Collection 1 aLogin
         run: |
-          newman run aLogin_collection.json -e postman_environment.json --delay-request 1 --reporters cli  -r htmlextra --reporter-htmlextra-export ./result1/Report.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Postman"
+          newman run aLogin_collection.json -e postman_environment.json --delay-request 1 --reporters cli  -r htmlextra --reporter1-htmlextra-export ./result1/Report.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Postman"
       
       - name: Rodando a Collection 2 Cadastro
         run: |
-          newman run Cadastro_collection.json -e postman_environment.json --delay-request 1 --reporters cli -r htmlextra --reporter-htmlextra-export ./result2/Report.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Cadastro" 
+          newman run Cadastro_collection.json -e postman_environment.json --delay-request 1 --reporters cli -r htmlextra --reporter2-htmlextra-export ./result2/Report.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Cadastro" 
       
       - name: Rodando a Collection 3 Editar
         run: |
-          newman run Editar_collection.json -e postman_environment.json --delay-request 1 --reporters cli -r htmlextra --reporter-htmlextra-export ./result3/Report.html --reporter-htmlextra-browserTitle "Teste API Editar" --reporter-htmlextra-title "Teste API Editar" 
+          newman run Editar_collection.json -e postman_environment.json --delay-request 1 --reporters cli -r htmlextra --reporter3-htmlextra-export ./result3/Report.html --reporter-htmlextra-browserTitle "Teste API Editar" --reporter-htmlextra-title "Teste API Editar" 
         
       - name: Rodando a Collection 4 Excluir
         run: |
-          newman run Excluir_collection.json -e postman_environment.json --delay-request 1 --reporters cli -r htmlextra --reporter-htmlextra-export ./result4/Report.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Excluir"
+          newman run Excluir_collection.json -e postman_environment.json --delay-request 1 --reporters cli -r htmlextra --reporter4-htmlextra-export ./result4/Report.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Excluir"
         
       - name: Rodando a Collection 5 Listar
         run: |
-          newman run Listar_collection.json -e postman_environment.json --delay-request 1 --reporters cli -r htmlextra --reporter-htmlextra-export ./result5/Report.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Listar" 
+          newman run Listar_collection.json -e postman_environment.json --delay-request 1 --reporters cli -r htmlextra --reporter5-htmlextra-export ./result5/Report.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Listar" 
 
         # Runs a set of command using the runners shell
       - name: Etapa 04 - Salvando o Resultado dos Testes
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: report
+          name: report1 report2 report3 report4 report5
           path: ./result1/ ./result2/ ./result3/ ./result4/ ./result5/
              
   deploy:
@@ -89,7 +89,7 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@v4
         with: 
-          name: report
+          name: report1 report2 report3 report4 report5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
