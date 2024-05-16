@@ -66,13 +66,17 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: report*
-          path: ./result1/ ./result2/ ./result3/ ./result4/ ./result5/
+          name: report1
+          path: ./result1/ 
+        
+      - name: Etapa 04 - Salvando o Resultado dos Testes
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: report2
+          path: ./result1/ 
      
-      - name: Move reports to public directory
-        run: |
-           report*.html public/reports/
-             
+    
   deploy:
     name: Deploy GitHub Pages 🌐
     runs-on: ubuntu-latest
