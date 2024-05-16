@@ -7,6 +7,219 @@
 	},
 	"item": [
 		{
+			"name": "Criando novo usuario",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.variables.replaceIn('{{$randomEmail}}')\r",
+							"\r",
+							"// Gerar um número aleatório com 11 dígitos\r",
+							"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
+							"\r",
+							"// Converter para string\r",
+							"var randomString = randomNumber.toString();\r",
+							"\r",
+							"// Definir a variável de ambiente com o número gerado\r",
+							"pm.environment.set(\"randomNumber\", randomString);\r",
+							"\r",
+							"\r",
+							"function firstName() {\r",
+							" var firstName = [\"Nara\", \"Cyntia\", \"Fabiano\", \"Mara\", \"Rubia\", \"Flavia\", \"Nubia\", \"Lucielle\", \"Aparecida\", \"Rodrigo\", \"Jose\", \"Kelly\", \"Cristina\", \"Luciana\", \"Lana\", \"Marcia\", \"Luiz\", \"Marcio\", \"Iraides\", \"Ana\", \"Pedro\", \"Maria\", \"João\",\r",
+							" \"Mariana\", \"Lucas\", \"Carla\", \"Gustavo\", \"Juliana\", \"Rafael\"];\r",
+							" var randomItem = firstName[Math.floor(Math.random() * firstName.length)];\r",
+							" return randomItem;\r",
+							"\r",
+							"}\r",
+							"pm.environment.set(\"FirstName\", firstName());\r",
+							"\r",
+							"\r",
+							"function lastName() {\r",
+							" var lastName = [\"Silva\", \"Marquez\", \"Gonçalves\", \"Santos\", \"Bueno\", \"Danesi\", \"Arruda\", \"Cardoso\", \"Fonseca\", \"Smith\", \"Pascoalle\", \"Marques\"];\r",
+							" var randomItem = lastName[Math.floor(Math.random() * lastName.length)];\r",
+							" return randomItem;\r",
+							"\r",
+							"}\r",
+							"pm.environment.set(\"LastName\", lastName());\r",
+							"\r",
+							"pm.environment.set(\"FullName\", pm.variables.get(\"FirstName\") + \" \" + pm.variables.get(\"LastName\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Email\", pm.variables.replaceIn('{{$randomEmail}}'));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token}}",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"fullName\": \"{{FullName}}\",\r\n  \"mail\": \"{{Email}}\",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{randomNumber}}\",\r\n  \"confirmPassword\": \"1234@Test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/user/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login novo usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"Email\", pm.variables.replaceIn('{{$randomEmail}}'));\r",
+							"\r",
+							"\r",
+							"function generateRandomPassword() {\r",
+							"    var charset = \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$%\";\r",
+							"    var password = \"\";\r",
+							"    var length = Math.floor(Math.random() * (12 - 8 + 1)) + 8; // Gera um comprimento aleatório entre 8 e 12\r",
+							"    var hasUpperCase = false;\r",
+							"    var hasLowerCase = false;\r",
+							"    var hasNumber = false;\r",
+							"    var hasSpecialChar = false;\r",
+							"\r",
+							"    while (!hasUpperCase || !hasLowerCase || !hasNumber || !hasSpecialChar) {\r",
+							"        password = \"\";\r",
+							"        for (var i = 0; i < length; i++) {\r",
+							"            var char = charset.charAt(Math.floor(Math.random() * charset.length));\r",
+							"            password += char;\r",
+							"            if (/[A-Z]/.test(char)) hasUpperCase = true;\r",
+							"            if (/[a-z]/.test(char)) hasLowerCase = true;\r",
+							"            if (/[0-9]/.test(char)) hasNumber = true;\r",
+							"            if (/[$%]/.test(char)) hasSpecialChar = true;\r",
+							"        }\r",
+							"    }\r",
+							"    return password;\r",
+							"}\r",
+							"// Chame a função para gerar a senha aleatória\r",
+							"var randomPassword = generateRandomPassword();\r",
+							"\r",
+							"// Defina a variável de ambiente no Postman\r",
+							"pm.environment.set(\"password\", randomPassword);\r",
+							"\r",
+							"console.log(generateRandomPassword());\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "{{tokenAdm}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"mail\": \"Melyssa.Hauck15@yahoo.com\",\r\n  \"password\": \"1234@Test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/login/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "CT-0001 Funcional - campo nome completo  preenchido",
 			"event": [
 				{
@@ -74,7 +287,7 @@
 					"apikey": [
 						{
 							"key": "value",
-							"value": "{{token_userid}}",
+							"value": "{{token}}",
 							"type": "string"
 						},
 						{
@@ -161,7 +374,7 @@
 					"apikey": [
 						{
 							"key": "value",
-							"value": "{{token_userid}}",
+							"value": "{{token}}",
 							"type": "string"
 						},
 						{
@@ -343,7 +556,7 @@
 					"apikey": [
 						{
 							"key": "value",
-							"value": "{{token_userid}}",
+							"value": "{{token}}",
 							"type": "string"
 						},
 						{
@@ -436,7 +649,7 @@
 					"apikey": [
 						{
 							"key": "value",
-							"value": "{{token_userid}}",
+							"value": "{{token}}",
 							"type": "string"
 						},
 						{
@@ -530,7 +743,7 @@
 					"apikey": [
 						{
 							"key": "value",
-							"value": "{{token_userid}}",
+							"value": "{{token}}",
 							"type": "string"
 						},
 						{
@@ -622,7 +835,7 @@
 					"apikey": [
 						{
 							"key": "value",
-							"value": "{{token_userid}}",
+							"value": "{{token}}",
 							"type": "string"
 						},
 						{
@@ -714,7 +927,7 @@
 					"apikey": [
 						{
 							"key": "value",
-							"value": "{{token_userid}}",
+							"value": "{{token}}",
 							"type": "string"
 						},
 						{
@@ -807,7 +1020,7 @@
 					"apikey": [
 						{
 							"key": "value",
-							"value": "{{token_userid}}",
+							"value": "{{token}}",
 							"type": "string"
 						},
 						{
@@ -884,7 +1097,7 @@
 					"apikey": [
 						{
 							"key": "value",
-							"value": "{{token_userid}}",
+							"value": "{{token}}",
 							"type": "string"
 						},
 						{
