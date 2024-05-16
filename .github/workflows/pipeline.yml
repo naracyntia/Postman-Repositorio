@@ -94,7 +94,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./result
+          path: ./result1/ ./result2/ ./result3/ ./result4/ ./result5/
 
       - name: Deploy to Github Pages
         id: deployment
