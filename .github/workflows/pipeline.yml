@@ -108,33 +108,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-  deploy2:
-    name: Deploy GitHub Pages 🌐
-    runs-on: ubuntu-latest
-    if: always()
-    needs: 
-      - test
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: https://naracyntia.github.io/Qualitys-Hunters-academy-api-com-postman/Report.html
-    steps:
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Download Artifacts
-        uses: actions/download-artifact@v4
-        with: 
-          name: report2 
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./result
-
-      - name: Deploy to Github Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+  
