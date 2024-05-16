@@ -68,6 +68,10 @@ jobs:
         with:
           name: report*
           path: ./result1/ ./result2/ ./result3/ ./result4/ ./result5/
+     
+      - name: Move reports to public directory
+        run: |
+           report*.html public/reports/
              
   deploy:
     name: Deploy GitHub Pages 🌐
