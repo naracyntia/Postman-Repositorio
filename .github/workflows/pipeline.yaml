@@ -29,19 +29,11 @@ jobs:
     - name: Run Newman tests for collections
       run: |
         mkdir -p results
-<<<<<<< HEAD
-        newman run path/to/your/aLogin.postman_collection.json -e postman_enviroment.json --reporters json --reporter-json-export results/aLogin.json
-        newman run path/to/your/Cadastro.postman_collection.json -e postman_enviroment.json --reporters json --reporter-json-export results/Cadastro.json
-        newman run path/to/your/Editar.postman_collection.json -e postman_enviroment.json --reporters json --reporter-json-export results/Editar.json
-        newman run path/to/your/Excluir.postman_collection.json -e postman_enviroment.json --reporters json --reporter-json-export results/Excluir.json
-        newman run path/to/your/Listar.postman_collection.json -e postman_enviroment.json --reporters json --reporter-json-export results/Listar.json
-=======
-        newman run path/to/your/aLogin.postman_collection.json --reporters json --reporter-json-export results/aLogin.json
-        newman run path/to/your/Cadastro.postman_collection.json --reporters json --reporter-json-export results/Cadastro.json
-        newman run path/to/your/Editar.postman_collection.json --reporters json --reporter-json-export results/Editar.json
-        newman run path/to/your/Excluir.postman_collection.json --reporters json --reporter-json-export results/Excluir.json
-        newman run path/to/your/Listar.postman_collection.json --reporters json --reporter-json-export results/Listar.json
->>>>>>> 0a5479992b41ce46657b8765b64c692aedfe0818
+        newman run path/to/your/aLogin.postman_collection.json -e "postman_enviroment.json" --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
+        newman run path/to/your/Cadastro.postman_collection.json -e "postman_enviroment.json" --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
+        newman run path/to/your/Editar.postman_collection.json -e "postman_enviroment.json" --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
+        newman run path/to/your/Excluir.postman_collection.json -e "postman_enviroment.json" --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
+        newman run path/to/your/Listar.postman_collection.json -e "postman_enviroment.json" --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
 
     - name: Merge JSON results
       run: |
@@ -51,8 +43,34 @@ jobs:
       run: |
         newman run path/to/your/aLogin.postman_collection.json --reporters htmlextra --reporter-htmlextra-export results/index.html --reporter-htmlextra-title "Consolidated Test Report" --reporter-htmlextra-jsonExport results/merged-result.json
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./results
+  deploy:
+      name: Deploy GitHub Pages 🌐
+      runs-on: ubuntu-latest
+      if: always()
+      needs: 
+       - test
+      permissions:
+        contents: read
+        pages: write
+        id-token: write
+      environment:
+        name: github-pages
+        url: https://naracyntia.github.io/Qualitys-Hunters-academy-api-com-postman/Report.html
+    
+      steps:
+        - name: Setup Pages
+          uses: actions/configure-pages@v5
+      
+        - name: Download Artifacts
+          uses: actions/download-artifact@v4
+          with: 
+            name: report
+      
+        - name: Upload artifact
+          uses: actions/upload-pages-artifact@v3
+          with:
+            path: ./
+      
+        - name: Deploy to Github Pages
+          id: deployment
+          uses: actions/deploy-pages@v4
