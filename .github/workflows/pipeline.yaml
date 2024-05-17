@@ -29,11 +29,19 @@ jobs:
     - name: Run Newman tests for collections
       run: |
         mkdir -p results
+<<<<<<< HEAD
         newman run path/to/your/aLogin.postman_collection.json -e postman_enviroment.json --reporters json --reporter-json-export results/aLogin.json
         newman run path/to/your/Cadastro.postman_collection.json -e postman_enviroment.json --reporters json --reporter-json-export results/Cadastro.json
         newman run path/to/your/Editar.postman_collection.json -e postman_enviroment.json --reporters json --reporter-json-export results/Editar.json
         newman run path/to/your/Excluir.postman_collection.json -e postman_enviroment.json --reporters json --reporter-json-export results/Excluir.json
         newman run path/to/your/Listar.postman_collection.json -e postman_enviroment.json --reporters json --reporter-json-export results/Listar.json
+=======
+        newman run path/to/your/aLogin.postman_collection.json --reporters json --reporter-json-export results/aLogin.json
+        newman run path/to/your/Cadastro.postman_collection.json --reporters json --reporter-json-export results/Cadastro.json
+        newman run path/to/your/Editar.postman_collection.json --reporters json --reporter-json-export results/Editar.json
+        newman run path/to/your/Excluir.postman_collection.json --reporters json --reporter-json-export results/Excluir.json
+        newman run path/to/your/Listar.postman_collection.json --reporters json --reporter-json-export results/Listar.json
+>>>>>>> 0a5479992b41ce46657b8765b64c692aedfe0818
 
     - name: Merge JSON results
       run: |
