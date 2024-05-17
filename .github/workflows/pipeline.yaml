@@ -43,7 +43,7 @@ jobs:
       # Runs a set of command using the runners shell
       - name: Etapa 03 - Rodando as Collections de Testes
         run: |
-          newman run "testes.postman_collection.json" -e "postman_environments.json" --delay-request 1 --reporters cli  -r htmlextra --reporter-htmlextra-export ./result2/Report.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Postman"
+          newman run "testes.postman_collection.json" -e "postman_environment.json" --delay-request 1 --reporters cli  -r htmlextra --reporter-htmlextra-export ./result2/Report.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Postman"
       
       # Runs a set of command using the runners shell
       - name: Etapa 04 - Salvando o Resultado dos Testes
