@@ -1,5 +1,3 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Teste API Postman
 
 # Controls when the workflow will run
@@ -38,46 +36,43 @@ jobs:
         run: |
           npm fund
           npm install -g newman
-          sudo npm install -g newman-reporter-htmlextra        
-     
-      # Rodando as Collections de Testes
+          sudo npm install -g newman-reporter-htmlextra 
+    # Rodando as Collections de Testes
       - name: Rodando a Collection 1 aLogin
         run: |
           newman run aLogin_collection.json -e postman_environment.json --delay-request 1 --reporters cli  -r htmlextra --reporter-htmlextra-export ./result/Report1.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Postman"
-      
+  
       - name: Rodando a Collection 2 Cadastro
         run: |
           newman run Cadastro_collection.json -e postman_environment.json --delay-request 1 --reporters cli -r htmlextra --reporter-htmlextra-export ./result/Report2.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Cadastro" 
-      
+  
       - name: Rodando a Collection 3 Editar
         run: |
           newman run Editar_collection.json -e postman_environment.json --delay-request 1 --reporters cli -r htmlextra --reporter-htmlextra-export ./result/Report3.html --reporter-htmlextra-browserTitle "Teste API Editar" --reporter-htmlextra-title "Teste API Editar" 
-        
+    
       - name: Rodando a Collection 4 Excluir
         run: |
           newman run Excluir_collection.json -e postman_environment.json --delay-request 1 --reporters cli -r htmlextra --reporter-htmlextra-export ./result/Report4.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Excluir"
-        
+    
       - name: Rodando a Collection 5 Listar
         run: |
-          newman run Listar_collection.json -e postman_environment.json --delay-request 1 --reporters cli -r htmlextra --reporter-htmlextra-export ./result/Report5.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Listar" 
-
-        # Runs a set of command using the runners shell
+          newman run Listar_collection.json -e postman_environment.json --delay-request 1 --reporters cli -r htmlextra --reporter-htmlextra-export ./result/Report5.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Listar"
+    
+    # Runs a set of command using the runners shell
       - name: Etapa 04 - Salvando o Resultado dos Testes
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: report1
-          path: ./result
-        
-
-     
+         name: report
+         path: ./result
     
+
   deploy:
     name: Deploy GitHub Pages 🌐
     runs-on: ubuntu-latest
     if: always()
     needs: 
-      - test
+    - test
     permissions:
       contents: read
       pages: write
@@ -85,22 +80,21 @@ jobs:
     environment:
       name: github-pages
       url: https://naracyntia.github.io/Qualitys-Hunters-academy-api-com-postman/Report.html
+    
     steps:
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
+     - name: Setup Pages
+       uses: actions/configure-pages@v5
 
-      - name: Download Artifacts
-        uses: actions/download-artifact@v4
-        with: 
-          name: report1 
+     - name: Download Artifacts
+       uses: actions/download-artifact@v4
+       with: 
+        name: report 
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./result
+     - name: Upload artifact
+       uses: actions/upload-pages-artifact@v3
+       with:
+        path: ./result
 
-      - name: Deploy to Github Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-
-  
+     - name: Deploy to Github Pages
+       id: deployment
+       uses: actions/deploy-pages@v4      
