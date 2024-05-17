@@ -40,38 +40,46 @@ jobs:
           npm fund
           npm install -g newman
           sudo npm install -g newman-reporter-htmlextra
-          npm install -g newman-reporter-merge 
+          sudo npm install -g newman-reporter-merge 
     
     # Rodando as Collections de Testes
       - name: Rodando a Collection aLogin
         run: |
-          newman run aLogin_collection.json -e postman_environment.json --reporters json --reporter-json-export results/aLogin.json
+          newman run aLogin_collection.json -e postman_environment.json --reporters json --reporter-json-export result/aLogin.json
   
       - name: Rodando a Collection Cadastro
         run: |
-          newman run Cadastro_collection.json -e postman_environment.json --reporters json --reporter-json-export results/Cadastro.json
+          newman run Cadastro_collection.json -e postman_environment.json --reporters json --reporter-json-export result/Cadastro.json
   
       - name: Rodando a Collection Editar
         run: |
-          newman run Editar_collection.json -e postman_environment.json --reporters json --reporter-json-export results/Editar.json
+          newman run Editar_collection.json -e postman_environment.json --reporters json --reporter-json-export result/Editar.json
     
       - name: Rodando a Collection Excluir
         run: |
-          newman run Excluir_collection.json -e postman_environment.json --reporters json --reporter-json-export results/Excluir.json
+          newman run Excluir_collection.json -e postman_environment.json --reporters json --reporter-json-export result/Excluir.json
     
       - name: Rodando a Collection Listar
         run: |
-          newman run Listar_collection.json -e postman_environment.json --reporters json --reporter-json-export results/Listar.json
+          newman run Listar_collection.json -e postman_environment.json --reporters json --reporter-json-export result/Listar.json
       
-      - name: Merge JSON results
+      - name: Merge JSON result
         run: |
-          npx newman-reporter-merge --sources results/aLogin.json results/Cadastro.json results/Editar.json results/Excluir.json results/Listar.json --output results/merged-result.json
+          npx newman-reporter-merge --sources result/aLogin.json result/Cadastro.json result/Editar.json result/Excluir.json results/Listar.json --output result/merged-result.json
     
       - name: Generate consolidated HTML report
         run: |
-          newman run aLogin.postman_collection.json --reporters htmlextra --reporter-htmlextra-export results/merged-result.html --reporter-htmlextra-title "Teste API Postman" --reporter-htmlextra-jsonExport results/merged-result.json     
+          newman run aLogin.postman_collection.json --reporters htmlextra --reporter-htmlextra-export result/merged-result.html --reporter-htmlextra-title "Teste API Postman" --reporter-htmlextra-jsonExport result/merged-result.json     
       
-    
+    # Runs a set of command using the runners shell
+      - name: Etapa 04 - Salvando o Resultado dos Testes
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reporter-merge
+          path: ./result
+
+
   deploy:
     name: Deploy GitHub Pages 🌐
     runs-on: ubuntu-latest
@@ -93,16 +101,12 @@ jobs:
      - name: Download Artifacts
        uses: actions/download-artifact@v4
        with: 
-        name: report 
+        name: reporter-merge 
 
      - name: Upload artifact
        uses: actions/upload-pages-artifact@v3
        with:
-        path: ./result1   
-              ./result2
-              ./result3
-              ./result4 
-              ./result5
+        path: ./result
 
      - name: Deploy to Github Pages
        id: deployment
