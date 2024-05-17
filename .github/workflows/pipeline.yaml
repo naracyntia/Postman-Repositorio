@@ -19,6 +19,9 @@ jobs:
     name: Testes API
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    strategy:
+        matrix:
+          collection: [aLogin, Cadastro, Editar, Excluir, Listar]
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -36,43 +39,39 @@ jobs:
         run: |
           npm fund
           npm install -g newman
-          sudo npm install -g newman-reporter-htmlextra 
+          sudo npm install -g newman-reporter-htmlextra
+          npm install -g newman-reporter-merge 
+    
     # Rodando as Collections de Testes
-      - name: Rodando a Collection 1 aLogin
+      - name: Rodando a Collection aLogin
         run: |
-          newman run aLogin_collection.json -e postman_environment.json --delay-request 1 --reporters cli  -r htmlextra --reporter-htmlextra-export ./result1/Report.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Postman"
+          newman run aLogin_collection.json -e postman_environment.json --reporters json --reporter-json-export results/aLogin.json
   
-      - name: Rodando a Collection 2 Cadastro
+      - name: Rodando a Collection Cadastro
         run: |
-          newman run Cadastro_collection.json -e postman_environment.json --delay-request 1 --reporters cli  -r htmlextra --reporter-htmlextra-export ./result2/Report.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Postman"
+          newman run Cadastro_collection.json -e postman_environment.json --reporters json --reporter-json-export results/Cadastro.json
   
-      - name: Rodando a Collection 3 Editar
+      - name: Rodando a Collection Editar
         run: |
-          newman run Editar_collection.json -e postman_environment.json --delay-request 1 --reporters cli  -r htmlextra --reporter-htmlextra-export ./result3/Report.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Postman"
+          newman run Editar_collection.json -e postman_environment.json --reporters json --reporter-json-export results/Editar.json
     
-      - name: Rodando a Collection 4 Excluir
+      - name: Rodando a Collection Excluir
         run: |
-          newman run Excluir_collection.json -e postman_environment.json --delay-request 1 --reporters cli  -r htmlextra --reporter-htmlextra-export ./result4/Report.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Postman"
+          newman run Excluir_collection.json -e postman_environment.json --reporters json --reporter-json-export results/Excluir.json
     
-      - name: Rodando a Collection 5 Listar
+      - name: Rodando a Collection Listar
         run: |
-          newman run Listar_collection.json -e postman_environment.json --delay-request 1 --reporters cli  -r htmlextra --reporter-htmlextra-export ./result5/Report.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Postman"
+          newman run Listar_collection.json -e postman_environment.json --reporters json --reporter-json-export results/Listar.json
+      
+      - name: Merge JSON results
+        run: |
+          npx newman-reporter-merge --sources results/aLogin.json results/Cadastro.json results/Editar.json results/Excluir.json results/Listar.json --output results/merged-result.json
     
+      - name: Generate consolidated HTML report
+        run: |
+          newman run aLogin.postman_collection.json --reporters htmlextra --reporter-htmlextra-export results/merged-result.html --reporter-htmlextra-title "Teste API Postman" --reporter-htmlextra-jsonExport results/merged-result.json     
       
     
-    # Runs a set of command using the runners shell
-      - name: Etapa 04 - Salvando o Resultado dos Testes
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-         name: report
-         path: ./result1   
-               ./result2
-               ./result3
-               ./result4 
-               ./result5
-    
-
   deploy:
     name: Deploy GitHub Pages 🌐
     runs-on: ubuntu-latest
