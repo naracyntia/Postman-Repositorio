@@ -26,13 +26,29 @@ jobs:
         npm install -g newman
         npm install -g newman-reporter-htmlextra
 
-    - name: Run Newman tests for collections
+    - name: Run Newman tests for collections aLogin
       run: |
         mkdir -p results
         newman run path/to/your/aLogin.postman_collection.json -e "postman_enviroment.json" --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
+     
+    - name: Run Newman tests for collections Cadastro
+      run: |
+        mkdir -p results  
         newman run path/to/your/Cadastro.postman_collection.json -e "postman_enviroment.json" --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
+    
+    - name: Run Newman tests for collections Editar
+      run: |
+        mkdir -p results
         newman run path/to/your/Editar.postman_collection.json -e "postman_enviroment.json" --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
+    
+    - name: Run Newman tests for collections Excluir
+      run: |
+        mkdir -p results
         newman run path/to/your/Excluir.postman_collection.json -e "postman_enviroment.json" --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
+     
+    - name: Run Newman tests for collections Listar
+      run: |
+        mkdir -p results
         newman run path/to/your/Listar.postman_collection.json -e "postman_enviroment.json" --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
 
     - name: Merge JSON results
@@ -74,3 +90,9 @@ jobs:
         - name: Deploy to Github Pages
           id: deployment
           uses: actions/deploy-pages@v4
+
+        - name: Deploy to GitHub Pages
+          uses: peaceiris/actions-gh-pages@v3
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: ./results
