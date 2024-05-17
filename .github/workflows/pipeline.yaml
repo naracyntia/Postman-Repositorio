@@ -40,23 +40,27 @@ jobs:
     # Rodando as Collections de Testes
       - name: Rodando a Collection 1 aLogin
         run: |
-          newman run aLogin_collection.json -e postman_environment.json --delay-request 1 --reporters cli  -r htmlextra --reporter-htmlextra-export ./result/Report.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Postman"
+          newman run aLogin_collection.json -e postman_environment.json 
   
       - name: Rodando a Collection 2 Cadastro
         run: |
-          newman run Cadastro_collection.json -e postman_environment.json --delay-request 1 --reporters cli -r htmlextra --reporter-htmlextra-export ./result/Report.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Cadastro" 
+          newman run Cadastro_collection.json -e postman_environment.json  
   
       - name: Rodando a Collection 3 Editar
         run: |
-          newman run Editar_collection.json -e postman_environment.json --delay-request 1 --reporters cli -r htmlextra --reporter-htmlextra-export ./result/Report.html --reporter-htmlextra-browserTitle "Teste API Editar" --reporter-htmlextra-title "Teste API Editar" 
+          newman run Editar_collection.json -e postman_environment.json  
     
       - name: Rodando a Collection 4 Excluir
         run: |
-          newman run Excluir_collection.json -e postman_environment.json --delay-request 1 --reporters cli -r htmlextra --reporter-htmlextra-export ./result/Report.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Excluir"
+          newman run Excluir_collection.json -e postman_environment.json 
     
       - name: Rodando a Collection 5 Listar
         run: |
-          newman run Listar_collection.json -e postman_environment.json --delay-request 1 --reporters cli -r htmlextra --reporter-htmlextra-export ./result/Report.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Listar"
+          newman run Listar_collection.json -e postman_environment.json 
+    
+      - name: Salvar os testes
+        run: |
+          --delay-request 1 --reporters cli  -r htmlextra --reporter-htmlextra-export ./result/Report.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Postman"
     
     # Runs a set of command using the runners shell
       - name: Etapa 04 - Salvando o Resultado dos Testes
@@ -64,7 +68,7 @@ jobs:
         if: always()
         with:
          name: report
-         path: ./result/
+         path: ./
     
 
   deploy:
