@@ -1,87 +1,85 @@
-name: CI Pipeline
+# This is a basic workflow to help you get started with Actions
 
+name: Testes API Postman
+
+# Controls when the workflow will run
 on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches:
-      - main
+    branches: [ "main" ]
   pull_request:
-    branches:
-      - main
+    branches: [ "main" ]
 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+
+  # This workflow contains a single job called "build"
   test:
+    name: Testes API
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Copiando os arquivos para maquina virtual
+        uses: actions/checkout@v4
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
+      # Runs a set of commands using the runners shell
+      - name: Etapa 01 - Verificação versão do Node e Newman
+        run: |
+          newman --version && node --version && ls
+              
+      # Runs a single command using the runners shell
+      - name: Etapa 02 - Html Extra Reporter
+        run: |
+          npm fund
+          npm install -g newman
+          sudo npm install -g newman-reporter-htmlextra        
 
-    - name: Install Newman and reporters
-      run: |
-        npm install -g newman
-        npm install -g newman-reporter-htmlextra
-
-    - name: Run Newman tests for collections aLogin
-      run: |
-        newman run aLogin_collection.json -e postman_environment.json --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
-     
-    - name: Run Newman tests for collections Cadastro
-      run: |
-        newman run Cadastro_collection.json -e postman_environment.json --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
-    
-    - name: Run Newman tests for collections Editar
-      run: |
-        newman run Editar_collection.json -e postman_environment.json --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
-    
-    - name: Run Newman tests for collections Excluir
-      run: |
-        newman run Excluir_collection.json -e postman_environment.json --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
-     
-    - name: Run Newman tests for collections Listar
-      run: |
-        newman run Listar_collection.json -e postman_environment.json --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
-
-    - name: Merge JSON results
-      run: |
-        node merge-results.js
-
-    - name: Generate consolidated HTML report
-      run: |
-        newman run path/to/your/aLogin_collection.json --reporters htmlextra --reporter-htmlextra-export results/index.html --reporter-htmlextra-title "Consolidated Test Report" --reporter-htmlextra-jsonExport results/merged-result.json
-
+      # Runs a set of command using the runners shell
+      - name: Etapa 03 - Rodando as Collections de Testes
+        run: |
+          newman run "testes.postman_collection.json" -e "postman_environments.json" --delay-request 1 --reporters cli  -r htmlextra --reporter-htmlextra-export ./result2/Report.html --reporter-htmlextra-browserTitle "Teste API Postman" --reporter-htmlextra-title "Teste API Postman"
+      
+      # Runs a set of command using the runners shell
+      - name: Etapa 04 - Salvando o Resultado dos Testes
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: report
+          path: ./result/
+             
   deploy:
-      name: Deploy GitHub Pages 🌐
-      runs-on: ubuntu-latest
-      if: always()
-      environment:
-        name: github-pages
-        url: https://naracyntia.github.io/Qualitys-Hunters-academy-api-com-postman/Report.html
-    
-      steps:
-        - name: Setup Pages
-          uses: actions/configure-pages@v5
-      
-        - name: Download Artifacts
-          uses: actions/download-artifact@v4
-          with: 
-            name: reporters
-      
-        - name: Upload artifact
-          uses: actions/upload-pages-artifact@v3
-          with:
-            path: ./
-      
-        - name: Deploy to Github Pages
-          id: deployment
-          uses: actions/deploy-pages@v4
+    name: Deploy GitHub Pages 🌐
+    runs-on: ubuntu-latest
+    if: always()
+    needs: 
+      - test
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: https://naracyntia.github.io/Qualitys-Hunters-academy-api-com-postman/Report.html
+    steps:
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
-        - name: Deploy to GitHub Pages
-          uses: peaceiris/actions-gh-pages@v3
-          with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            publish_dir: ./results      
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with: 
+          name: report
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./
+
+      - name: Deploy to Github Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
