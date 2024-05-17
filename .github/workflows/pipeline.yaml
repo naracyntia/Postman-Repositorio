@@ -28,27 +28,22 @@ jobs:
 
     - name: Run Newman tests for collections aLogin
       run: |
-        mkdir -p results
         newman run path/to/your/aLogin_collection.json -e "postman_environment.json" --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
      
     - name: Run Newman tests for collections Cadastro
       run: |
-        mkdir -p results  
         newman run path/to/your/Cadastro_collection.json -e "postman_environment.json --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
     
     - name: Run Newman tests for collections Editar
       run: |
-        mkdir -p results
         newman run path/to/your/Editar_collection.json -e "postman_environment.json" --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
     
     - name: Run Newman tests for collections Excluir
       run: |
-        mkdir -p results
         newman run path/to/your/Excluir_collection.json -e "postman_environment.json" --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
      
     - name: Run Newman tests for collections Listar
       run: |
-        mkdir -p results
         newman run path/to/your/Listar_collection.json -e "postman_environment.json" --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
 
     - name: Merge JSON results
@@ -74,7 +69,7 @@ jobs:
         - name: Download Artifacts
           uses: actions/download-artifact@v4
           with: 
-            name: report
+            name: reporter
       
         - name: Upload artifact
           uses: actions/upload-pages-artifact@v3
