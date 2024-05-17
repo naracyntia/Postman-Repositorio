@@ -40,7 +40,7 @@ jobs:
           npm fund
           npm install -g newman
           sudo npm install -g newman-reporter-htmlextra
-          sudo npm install -g newman-reporter-merge 
+          sudo npm install -g newman-merge 
     
     # Rodando as Collections de Testes
       - name: Rodando a Collection aLogin
@@ -65,7 +65,7 @@ jobs:
       
       - name: Merge JSON result
         run: |
-          npx newman-reporter-merge --sources result/aLogin.json result/Cadastro.json result/Editar.json result/Excluir.json results/Listar.json --output result/merged-result.json
+          npx newman-merge --sources result/aLogin.json result/Cadastro.json result/Editar.json result/Excluir.json results/Listar.json --output result/merged-result.json
     
       - name: Generate consolidated HTML report
         run: |
