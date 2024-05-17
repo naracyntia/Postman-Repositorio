@@ -29,27 +29,27 @@ jobs:
     - name: Run Newman tests for collections aLogin
       run: |
         mkdir -p results
-        newman run path/to/your/aLogin.postman_collection.json -e "postman_enviroment.json" --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
+        newman run path/to/your/aLogin_collection.json -e "postman_environment.json" --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
      
     - name: Run Newman tests for collections Cadastro
       run: |
         mkdir -p results  
-        newman run path/to/your/Cadastro.postman_collection.json -e "postman_enviroment.json" --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
+        newman run path/to/your/Cadastro_collection.json -e "postman_environment.json --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
     
     - name: Run Newman tests for collections Editar
       run: |
         mkdir -p results
-        newman run path/to/your/Editar.postman_collection.json -e "postman_enviroment.json" --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
+        newman run path/to/your/Editar_collection.json -e "postman_environment.json" --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
     
     - name: Run Newman tests for collections Excluir
       run: |
         mkdir -p results
-        newman run path/to/your/Excluir.postman_collection.json -e "postman_enviroment.json" --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
+        newman run path/to/your/Excluir_collection.json -e "postman_environment.json" --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
      
     - name: Run Newman tests for collections Listar
       run: |
         mkdir -p results
-        newman run path/to/your/Listar.postman_collection.json -e "postman_enviroment.json" --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
+        newman run path/to/your/Listar_collection.json -e "postman_environment.json" --delay-request 1 --reporters cli --reporter-htmlextra-displayProgressBar, -r htmlextra --reporter-htmlextra-export ./result/Report.html results/aLogin.json
 
     - name: Merge JSON results
       run: |
@@ -57,18 +57,12 @@ jobs:
 
     - name: Generate consolidated HTML report
       run: |
-        newman run path/to/your/aLogin.postman_collection.json --reporters htmlextra --reporter-htmlextra-export results/index.html --reporter-htmlextra-title "Consolidated Test Report" --reporter-htmlextra-jsonExport results/merged-result.json
+        newman run path/to/your/aLogin_collection.json --reporters htmlextra --reporter-htmlextra-export results/index.html --reporter-htmlextra-title "Consolidated Test Report" --reporter-htmlextra-jsonExport results/merged-result.json
 
   deploy:
       name: Deploy GitHub Pages 🌐
       runs-on: ubuntu-latest
       if: always()
-      needs: 
-       - test
-      permissions:
-        contents: read
-        pages: write
-        id-token: write
       environment:
         name: github-pages
         url: https://naracyntia.github.io/Qualitys-Hunters-academy-api-com-postman/Report.html
@@ -95,4 +89,4 @@ jobs:
           uses: peaceiris/actions-gh-pages@v3
           with:
             github_token: ${{ secrets.GITHUB_TOKEN }}
-            publish_dir: ./results
+            publish_dir: ./results      
