@@ -10,115 +10,15 @@
 			"name": "login",
 			"item": [
 				{
-					"name": "CT-0009 Não funcional -  login invalido e senha válida",
+					"name": "Validation Token",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test('Status code is 400', function () {\r",
-									"    pm.response.to.have.status(400);\r",
-									"})\r",
-									"\r",
-									"pm.test(\"Alert message is correct\", function () {\r",
-									"    pm.expect(pm.response.json().alert).to.eql(\"E-mail ou senha informados são inválidos.\");\r",
-									"});\r",
-									"\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"mail\": \"ysadmin @qacoders.com\",\r\n  \"password\": \"1234@Test\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/api/login/",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"login",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "CT-0006 Não funcional -  Login com email e senha contendo espaço em branco",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test('Status code is 400', function () {\r",
-									"    pm.response.to.have.status(400);\r",
-									"})\r",
-									"\r",
-									"pm.test(\"Alert message is correct\", function () {\r",
-									"    pm.expect(pm.response.json().alert).to.eql(\"E-mail ou senha informados são inválidos.\");\r",
-									"});\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"mail\": \"sysadmin @qacoders.com\",\r\n  \"password\": \"1234 @Test\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/api/login/",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"login",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "CT-0003 Não funcional - Senha Vazia e email preenchido",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 400\", function () {\r",
-									"    pm.response.to.have.status(400);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"alert\", function(){\r",
-									"    pm.expect(pm.response.json().alert).to.eql(\"E-mail ou senha informados são inválidos.\")\r",
-									"\r",
-									"})"
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -139,55 +39,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"mail\": \"sysadmin@qacoders.com\",\n  \"password\": \" \"\n}"
-						},
-						"url": {
-							"raw": "{{url}}/api/login/",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"login",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "CT-0002 Não funcional - Email Vazio e senha preenchida",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 400\", function () {\r",
-									"    pm.response.to.have.status(400);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"alert\", function(){\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.alert).to.eql(\"E-mail ou senha informados são inválidos.\");\r",
-									"});\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"mail\": \" \",\r\n  \"password\": \"1234@Test\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\n  \"mail\": \"sysadmin@qacoders.com\",\n  \"password\": \"1234@Test\"\n}"
 						},
 						"url": {
 							"raw": "{{url}}/api/login/",
@@ -261,155 +113,20 @@
 					"response": []
 				},
 				{
-					"name": "Validation Token",
+					"name": "CT-0002 Não funcional - Email Vazio e senha preenchida",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"mail\": \"sysadmin@qacoders.com\",\n  \"password\": \"1234@Test\"\n}"
-						},
-						"url": {
-							"raw": "{{url}}/api/login/",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"login",
-								""
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "cadastro usuario",
-			"item": [
-				{
-					"name": "Validation Token Copy",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"mail\": \"sysadmin@qacoders.com\",\n  \"password\": \"1234@Test\"\n}"
-						},
-						"url": {
-							"raw": "{{url}}/api/login/",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"login",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Login novo usuario",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Response status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"pm.environment.set(\"Email\", pm.variables.replaceIn('{{$randomEmail}}'));\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
 									"\r",
-									"\r",
-									"function generateRandomPassword() {\r",
-									"    var charset = \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$%\";\r",
-									"    var password = \"\";\r",
-									"    var length = Math.floor(Math.random() * (12 - 8 + 1)) + 8; // Gera um comprimento aleatório entre 8 e 12\r",
-									"    var hasUpperCase = false;\r",
-									"    var hasLowerCase = false;\r",
-									"    var hasNumber = false;\r",
-									"    var hasSpecialChar = false;\r",
-									"\r",
-									"    while (!hasUpperCase || !hasLowerCase || !hasNumber || !hasSpecialChar) {\r",
-									"        password = \"\";\r",
-									"        for (var i = 0; i < length; i++) {\r",
-									"            var char = charset.charAt(Math.floor(Math.random() * charset.length));\r",
-									"            password += char;\r",
-									"            if (/[A-Z]/.test(char)) hasUpperCase = true;\r",
-									"            if (/[a-z]/.test(char)) hasLowerCase = true;\r",
-									"            if (/[0-9]/.test(char)) hasNumber = true;\r",
-									"            if (/[$%]/.test(char)) hasSpecialChar = true;\r",
-									"        }\r",
-									"    }\r",
-									"    return password;\r",
-									"}\r",
-									"// Chame a função para gerar a senha aleatória\r",
-									"var randomPassword = generateRandomPassword();\r",
-									"\r",
-									"// Defina a variável de ambiente no Postman\r",
-									"pm.environment.set(\"password\", randomPassword);\r",
-									"\r",
-									"console.log(generateRandomPassword());\r",
+									"pm.test(\"alert\", function(){\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.alert).to.eql(\"E-mail ou senha informados são inválidos.\");\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -418,31 +135,11 @@
 						}
 					],
 					"request": {
-						"auth": {
-							"type": "apikey",
-							"apikey": [
-								{
-									"key": "in",
-									"value": "query",
-									"type": "string"
-								},
-								{
-									"key": "value",
-									"value": "{{tokenAdm}}",
-									"type": "string"
-								},
-								{
-									"key": "key",
-									"value": "token",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"mail\": \"Melyssa.Hauck15@yahoo.com\",\r\n  \"password\": \"1234@Test\"\r\n}",
+							"raw": "{\r\n  \"mail\": \" \",\r\n  \"password\": \"1234@Test\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -463,6 +160,157 @@
 					},
 					"response": []
 				},
+				{
+					"name": "CT-0003 Não funcional - Senha Vazia e email preenchido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"alert\", function(){\r",
+									"    pm.expect(pm.response.json().alert).to.eql(\"E-mail ou senha informados são inválidos.\")\r",
+									"\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"mail\": \"sysadmin@qacoders.com\",\n  \"password\": \" \"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/login/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CT-0006 Não funcional -  Login com email e senha contendo espaço em branco",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code is 400', function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Alert message is correct\", function () {\r",
+									"    pm.expect(pm.response.json().alert).to.eql(\"E-mail ou senha informados são inválidos.\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"mail\": \"sysadmin @qacoders.com\",\r\n  \"password\": \"1234 @Test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/login/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CT-0009 Não funcional -  login invalido e senha válida",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code is 400', function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Alert message is correct\", function () {\r",
+									"    pm.expect(pm.response.json().alert).to.eql(\"E-mail ou senha informados são inválidos.\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"mail\": \"ysadmin @qacoders.com\",\r\n  \"password\": \"1234@Test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/login/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cadastro usuario",
+			"item": [
 				{
 					"name": "Criando novo usuario",
 					"event": [
@@ -564,6 +412,112 @@
 							"path": [
 								"api",
 								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login novo usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"Email\", pm.variables.replaceIn('{{$randomEmail}}'));\r",
+									"\r",
+									"\r",
+									"function generateRandomPassword() {\r",
+									"    var charset = \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$%\";\r",
+									"    var password = \"\";\r",
+									"    var length = Math.floor(Math.random() * (12 - 8 + 1)) + 8; // Gera um comprimento aleatório entre 8 e 12\r",
+									"    var hasUpperCase = false;\r",
+									"    var hasLowerCase = false;\r",
+									"    var hasNumber = false;\r",
+									"    var hasSpecialChar = false;\r",
+									"\r",
+									"    while (!hasUpperCase || !hasLowerCase || !hasNumber || !hasSpecialChar) {\r",
+									"        password = \"\";\r",
+									"        for (var i = 0; i < length; i++) {\r",
+									"            var char = charset.charAt(Math.floor(Math.random() * charset.length));\r",
+									"            password += char;\r",
+									"            if (/[A-Z]/.test(char)) hasUpperCase = true;\r",
+									"            if (/[a-z]/.test(char)) hasLowerCase = true;\r",
+									"            if (/[0-9]/.test(char)) hasNumber = true;\r",
+									"            if (/[$%]/.test(char)) hasSpecialChar = true;\r",
+									"        }\r",
+									"    }\r",
+									"    return password;\r",
+									"}\r",
+									"// Chame a função para gerar a senha aleatória\r",
+									"var randomPassword = generateRandomPassword();\r",
+									"\r",
+									"// Defina a variável de ambiente no Postman\r",
+									"pm.environment.set(\"password\", randomPassword);\r",
+									"\r",
+									"console.log(generateRandomPassword());\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{tokenAdm}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"mail\": \"Jessie10@yahoo.com\",\r\n  \"password\": \"1234@Test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/login/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"login",
 								""
 							]
 						}
@@ -1425,15 +1379,60 @@
 			"name": "editar usuario",
 			"item": [
 				{
-					"name": "Validation Token Copy 2",
+					"name": "novo usuario",
 					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.variables.replaceIn('{{$randomEmail}}')\r",
+									"\r",
+									"// Gerar um número aleatório com 11 dígitos\r",
+									"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
+									"\r",
+									"// Converter para string\r",
+									"var randomString = randomNumber.toString();\r",
+									"\r",
+									"// Definir a variável de ambiente com o número gerado\r",
+									"pm.environment.set(\"randomNumber\", randomString);\r",
+									"\r",
+									"\r",
+									"function firstName() {\r",
+									" var firstName = [\"Nara\", \"Cyntia\", \"Fabiano\", \"Mara\", \"Rubia\", \"Flavia\", \"Nubia\", \"Lucielle\", \"Aparecida\", \"Rodrigo\", \"Jose\", \"Kelly\", \"Cristina\", \"Luciana\", \"Lana\", \"Marcia\", \"Luiz\", \"Marcio\", \"Iraides\", \"Ana\", \"Pedro\", \"Maria\", \"João\",\r",
+									" \"Mariana\", \"Lucas\", \"Carla\", \"Gustavo\", \"Juliana\", \"Rafael\"];\r",
+									" var randomItem = firstName[Math.floor(Math.random() * firstName.length)];\r",
+									" return randomItem;\r",
+									"\r",
+									"}\r",
+									"pm.environment.set(\"FirstName\", firstName());\r",
+									"\r",
+									"\r",
+									"function lastName() {\r",
+									" var lastName = [\"Silva\", \"Marquez\", \"Gonçalves\", \"Santos\", \"Bueno\", \"Danesi\", \"Arruda\", \"Cardoso\", \"Fonseca\", \"Smith\", \"Pascoalle\", \"Marques\"];\r",
+									" var randomItem = lastName[Math.floor(Math.random() * lastName.length)];\r",
+									" return randomItem;\r",
+									"\r",
+									"}\r",
+									"pm.environment.set(\"LastName\", lastName());\r",
+									"\r",
+									"pm.environment.set(\"FullName\", pm.variables.get(\"FirstName\") + \" \" + pm.variables.get(\"LastName\"));\r",
+									"\r",
+									"\r",
+									"pm.environment.set(\"Email\", pm.variables.replaceIn('{{$randomEmail}}'));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -1441,20 +1440,142 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
-						"header": [
-							{
-								"key": "accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"mail\": \"sysadmin@qacoders.com\",\n  \"password\": \"1234@Test\"\n}"
+							"raw": "{\r\n  \"fullName\": \"{{FullName}}\",\r\n  \"mail\": \"{{Email}}\",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{randomNumber}}\",\r\n  \"confirmPassword\": \"1234@Test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "novo login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.environment.set(\"variable_token\", \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ3ZWZkOWI5MWFhNjBhNDYyMTY1MzQiLCJmdWxsTmFtZSI6Ikp1bGlhbmEgU2lsdmEiLCJtYWlsIjoiSmVzc2llMTBAeWFob28uY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkQ1RMencxMU1GYzdwbVJKV2VVWmRiLlluOXlNU2RSbndrcHIvVVBzMkdsLlNaZUFwYTRuMTYiLCJhY2Nlc3NQcm9maWxlIjoiQURNSU4iLCJjcGYiOiI2NzYzMTMzOTEwOCIsInN0YXR1cyI6dHJ1ZSwiYXVkaXQiOlt7InJlZ2lzdGVyZWRCeSI6eyJ1c2VySWQiOiI2NTMzMDk5YWZhNzBkNTMwNzVjODFlZjQiLCJ1c2VyTG9naW4iOiJzeXNhZG1pbkBxYWNvZGVycy5jb20ifSwicmVnaXN0cmF0aW9uRGF0ZSI6InNleHRhLWZlaXJhLCAxNy8wNS8yMDI0LCAyMTowMToyOCBCUlQiLCJyZWdpc3RyYXRpb25OdW1iZXIiOiJRYUNvZGVycy00MjA4IiwiX2lkIjoiNjY0N2VmZDliOTFhYTYwYTQ2MjE2NTM1In1dLCJfX3YiOjAsImlhdCI6MTcxNTk5MjcxNiwiZXhwIjoxNzE2MDc5MTE2fQ.l9sMEAsJ9vRK8_Q0KdWHMX3a9JZ_QsBdspiyslt_-CA\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"Email\", pm.variables.replaceIn('{{$randomEmail}}'));\r",
+									"\r",
+									"\r",
+									"function generateRandomPassword() {\r",
+									"    var charset = \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$%\";\r",
+									"    var password = \"\";\r",
+									"    var length = Math.floor(Math.random() * (12 - 8 + 1)) + 8; // Gera um comprimento aleatório entre 8 e 12\r",
+									"    var hasUpperCase = false;\r",
+									"    var hasLowerCase = false;\r",
+									"    var hasNumber = false;\r",
+									"    var hasSpecialChar = false;\r",
+									"\r",
+									"    while (!hasUpperCase || !hasLowerCase || !hasNumber || !hasSpecialChar) {\r",
+									"        password = \"\";\r",
+									"        for (var i = 0; i < length; i++) {\r",
+									"            var char = charset.charAt(Math.floor(Math.random() * charset.length));\r",
+									"            password += char;\r",
+									"            if (/[A-Z]/.test(char)) hasUpperCase = true;\r",
+									"            if (/[a-z]/.test(char)) hasLowerCase = true;\r",
+									"            if (/[0-9]/.test(char)) hasNumber = true;\r",
+									"            if (/[$%]/.test(char)) hasSpecialChar = true;\r",
+									"        }\r",
+									"    }\r",
+									"    return password;\r",
+									"}\r",
+									"// Chame a função para gerar a senha aleatória\r",
+									"var randomPassword = generateRandomPassword();\r",
+									"\r",
+									"// Defina a variável de ambiente no Postman\r",
+									"pm.environment.set(\"password\", randomPassword);\r",
+									"\r",
+									"console.log(generateRandomPassword());\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{tokenAdm}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"mail\": \"Jessie10@yahoo.com\",\r\n  \"password\": \"1234@Test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{url}}/api/login/",
@@ -1565,7 +1686,9 @@
 									"var randomString = randomNumber.toString();\r",
 									"\r",
 									"// Definir a variável de ambiente com o número gerado\r",
-									"pm.environment.set(\"randomNumber\", randomString);"
+									"pm.environment.set(\"randomNumber\", randomString);\r",
+									"\r",
+									"pm.environment.get(\"token\");"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -1599,7 +1722,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{token}}",
+									"value": "{{variable_token}}",
 									"type": "string"
 								},
 								{
@@ -1688,7 +1811,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{token}}",
+									"value": "{{variable_token}}",
 									"type": "string"
 								},
 								{
@@ -1707,7 +1830,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"fullName\": \"Teste Nara NLogin\",\r\n  \"mail\": \"{{$randomEmail}}\",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{randomNumber}}\",\r\n  \"confirmPassword\": \"1234@Test\"\r\n}",
+							"raw": "{\r\n  \"fullName\": \"Teste Nara NLogin\",\r\n  \"mail\": \"{{Email}}\",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{randomNumber}}\",\r\n  \"confirmPassword\": \"1234@Test\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1773,7 +1896,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{token}}",
+									"value": "{{variable_token}}",
 									"type": "string"
 								},
 								{
@@ -1874,7 +1997,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{token}}",
+									"value": "{{variable_token}}",
 									"type": "string"
 								},
 								{
@@ -1974,7 +2097,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{token}}",
+									"value": "{{variable_token}}",
 									"type": "string"
 								},
 								{
@@ -2083,122 +2206,19 @@
 						}
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "excluir usuario",
+			"item": [
 				{
-					"name": "Login novo user",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Response status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"pm.environment.set(\"Email\", pm.variables.replaceIn('{{$randomEmail}}'));\r",
-									"\r",
-									"\r",
-									"function generateRandomPassword() {\r",
-									"    var charset = \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$%\";\r",
-									"    var password = \"\";\r",
-									"    var length = Math.floor(Math.random() * (12 - 8 + 1)) + 8; // Gera um comprimento aleatório entre 8 e 12\r",
-									"    var hasUpperCase = false;\r",
-									"    var hasLowerCase = false;\r",
-									"    var hasNumber = false;\r",
-									"    var hasSpecialChar = false;\r",
-									"\r",
-									"    while (!hasUpperCase || !hasLowerCase || !hasNumber || !hasSpecialChar) {\r",
-									"        password = \"\";\r",
-									"        for (var i = 0; i < length; i++) {\r",
-									"            var char = charset.charAt(Math.floor(Math.random() * charset.length));\r",
-									"            password += char;\r",
-									"            if (/[A-Z]/.test(char)) hasUpperCase = true;\r",
-									"            if (/[a-z]/.test(char)) hasLowerCase = true;\r",
-									"            if (/[0-9]/.test(char)) hasNumber = true;\r",
-									"            if (/[$%]/.test(char)) hasSpecialChar = true;\r",
-									"        }\r",
-									"    }\r",
-									"    return password;\r",
-									"}\r",
-									"// Chame a função para gerar a senha aleatória\r",
-									"var randomPassword = generateRandomPassword();\r",
-									"\r",
-									"// Defina a variável de ambiente no Postman\r",
-									"pm.environment.set(\"password\", randomPassword);\r",
-									"\r",
-									"console.log(generateRandomPassword());\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "apikey",
-							"apikey": [
-								{
-									"key": "in",
-									"value": "query",
-									"type": "string"
-								},
-								{
-									"key": "value",
-									"value": "{{tokenAdm}}",
-									"type": "string"
-								},
-								{
-									"key": "key",
-									"value": "token",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"mail\": \"Melyssa.Hauck15@yahoo.com\",\r\n  \"password\": \"1234@Test\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/api/login/",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"login",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Criando novo Login",
+					"name": "Cadastro novo user",
 					"event": [
 						{
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.variables.replaceIn('{{$randomEmail}}')\r",
-									"\r",
 									"// Gerar um número aleatório com 11 dígitos\r",
 									"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
 									"\r",
@@ -2227,10 +2247,15 @@
 									"}\r",
 									"pm.environment.set(\"LastName\", lastName());\r",
 									"\r",
+									"\r",
 									"pm.environment.set(\"FullName\", pm.variables.get(\"FirstName\") + \" \" + pm.variables.get(\"LastName\"));\r",
 									"\r",
+									"pm.environment.set(\"Email\", pm.variables.replaceIn('{{$randomEmail}}'));\r",
 									"\r",
-									"pm.environment.set(\"Email\", pm.variables.replaceIn('{{$randomEmail}}'));"
+									"\r",
+									"\r",
+									"\r",
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -2240,10 +2265,13 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code name has string\", function () {\r",
+									"    pm.response.to.have.status(\"Created\");\r",
+									"});\r",
+									"\r",
 									"pm.test(\"Status code is 201\", function () {\r",
 									"    pm.response.to.have.status(201);\r",
 									"});\r",
-									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -2273,15 +2301,23 @@
 							]
 						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGU3ZjBlMTZiYmU3M2VkMWUxYzEiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRZWWpPM1d3ZlgwOHROMHJTWkQ1UVVlWW0wb2h1cGJCTkdzZnFUc3hnUHdIalMyYnFvcGR1eSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjM0OjIzIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBlN2YwZTE2YmJlNzNlZDFlMWMyIn1dLCJfX3YiOjAsImlhdCI6MTcwOTIzMzQxNiwiZXhwIjoxNzA5MzE5ODE2fQ.AifdGJewaXsoJqvsOy7j4b2Q9MpNGGoeclHNfStrHHc"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"fullName\": \"{{FullName}}\",\r\n  \"mail\": \"{{Email}}\",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{randomNumber}}\",\r\n  \"confirmPassword\": \"1234@Test\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\n  \"fullName\": \"{{FullName}}\",\n  \"mail\": \"{{Email}}\",\n  \"password\": \"1234@Test\",\n  \"accessProfile\": \"ADMIN\",\n  \"cpf\": \"{{randomNumber}}\",\n  \"confirmPassword\": \"1234@Test\"\n}"
 						},
 						"url": {
 							"raw": "{{url}}/api/user/",
@@ -2292,127 +2328,6 @@
 								"api",
 								"user",
 								""
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "excluir usuario",
-			"item": [
-				{
-					"name": "Validation Token Copy 3",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"mail\": \"sysadmin@qacoders.com\",\n  \"password\": \"1234@Test\"\n}"
-						},
-						"url": {
-							"raw": "{{url}}/api/login/",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"login",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "CT-0003 - Validar se houve atualização da lista após exclusão",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 404\", function () {\r",
-									"    pm.response.to.have.status(404);\r",
-									"});\r",
-									"\r",
-									"\r",
-									"pm.test(\"Esse usuário não existe em nossa base de dados.\", function(){\r",
-									"    pm.expect(pm.response.json().alert[0]).to.eql(\"Esse usuário não existe em nossa base de dados.\");\r",
-									"})\r",
-									"\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "apikey",
-							"apikey": [
-								{
-									"key": "value",
-									"value": "{{token}}",
-									"type": "string"
-								},
-								{
-									"key": "in",
-									"value": "query",
-									"type": "string"
-								},
-								{
-									"key": "key",
-									"value": "token",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/user/{{id_userdel}}",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"user",
-								"{{id_userdel}}"
 							]
 						}
 					},
@@ -2459,7 +2374,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{token}}",
+									"value": "{{variable_token}}",
 									"type": "string"
 								},
 								{
@@ -2582,7 +2497,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{token}}",
+									"value": "{{variable_token}}",
 									"type": "string"
 								},
 								{
@@ -2631,47 +2546,20 @@
 					"response": []
 				},
 				{
-					"name": "Cadastro novo user",
+					"name": "CT-0003 - Validar se houve atualização da lista após exclusão",
 					"event": [
 						{
-							"listen": "prerequest",
+							"listen": "test",
 							"script": {
 								"exec": [
-									"// Gerar um número aleatório com 11 dígitos\r",
-									"var randomNumber = Math.floor(Math.random() * 90000000000) + 10000000000;\r",
-									"\r",
-									"// Converter para string\r",
-									"var randomString = randomNumber.toString();\r",
-									"\r",
-									"// Definir a variável de ambiente com o número gerado\r",
-									"pm.environment.set(\"randomNumber\", randomString);\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
 									"\r",
 									"\r",
-									"function firstName() {\r",
-									" var firstName = [\"Nara\", \"Cyntia\", \"Fabiano\", \"Mara\", \"Rubia\", \"Flavia\", \"Nubia\", \"Lucielle\", \"Aparecida\", \"Rodrigo\", \"Jose\", \"Kelly\", \"Cristina\", \"Luciana\", \"Lana\", \"Marcia\", \"Luiz\", \"Marcio\", \"Iraides\", \"Ana\", \"Pedro\", \"Maria\", \"João\",\r",
-									" \"Mariana\", \"Lucas\", \"Carla\", \"Gustavo\", \"Juliana\", \"Rafael\"];\r",
-									" var randomItem = firstName[Math.floor(Math.random() * firstName.length)];\r",
-									" return randomItem;\r",
-									"\r",
-									"}\r",
-									"pm.environment.set(\"FirstName\", firstName());\r",
-									"\r",
-									"\r",
-									"function lastName() {\r",
-									" var lastName = [\"Silva\", \"Marquez\", \"Gonçalves\", \"Santos\", \"Bueno\", \"Danesi\", \"Arruda\", \"Cardoso\", \"Fonseca\", \"Smith\", \"Pascoalle\", \"Marques\"];\r",
-									" var randomItem = lastName[Math.floor(Math.random() * lastName.length)];\r",
-									" return randomItem;\r",
-									"\r",
-									"}\r",
-									"pm.environment.set(\"LastName\", lastName());\r",
-									"\r",
-									"\r",
-									"pm.environment.set(\"FullName\", pm.variables.get(\"FirstName\") + \" \" + pm.variables.get(\"LastName\"));\r",
-									"\r",
-									"pm.environment.set(\"Email\", pm.variables.replaceIn('{{$randomEmail}}'));\r",
-									"\r",
-									"\r",
-									"\r",
+									"pm.test(\"Esse usuário não existe em nossa base de dados.\", function(){\r",
+									"    pm.expect(pm.response.json().alert[0]).to.eql(\"Esse usuário não existe em nossa base de dados.\");\r",
+									"})\r",
 									"\r",
 									""
 								],
@@ -2680,16 +2568,9 @@
 							}
 						},
 						{
-							"listen": "test",
+							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code name has string\", function () {\r",
-									"    pm.response.to.have.status(\"Created\");\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Status code is 201\", function () {\r",
-									"    pm.response.to.have.status(201);\r",
-									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -2718,34 +2599,17 @@
 								}
 							]
 						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGU3ZjBlMTZiYmU3M2VkMWUxYzEiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRZWWpPM1d3ZlgwOHROMHJTWkQ1UVVlWW0wb2h1cGJCTkdzZnFUc3hnUHdIalMyYnFvcGR1eSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjM0OjIzIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBlN2YwZTE2YmJlNzNlZDFlMWMyIn1dLCJfX3YiOjAsImlhdCI6MTcwOTIzMzQxNiwiZXhwIjoxNzA5MzE5ODE2fQ.AifdGJewaXsoJqvsOy7j4b2Q9MpNGGoeclHNfStrHHc"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"fullName\": \"{{FullName}}\",\n  \"mail\": \"{{Email}}\",\n  \"password\": \"1234@Test\",\n  \"accessProfile\": \"ADMIN\",\n  \"cpf\": \"{{randomNumber}}\",\n  \"confirmPassword\": \"1234@Test\"\n}"
-						},
+						"method": "GET",
+						"header": [],
 						"url": {
-							"raw": "{{url}}/api/user/",
+							"raw": "{{url}}/api/user/{{id_userdel}}",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"user",
-								""
+								"{{id_userdel}}"
 							]
 						}
 					},
@@ -2756,52 +2620,6 @@
 		{
 			"name": "listar usuario",
 			"item": [
-				{
-					"name": "Validation Token Copy 4",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"mail\": \"sysadmin@qacoders.com\",\n  \"password\": \"1234@Test\"\n}"
-						},
-						"url": {
-							"raw": "{{url}}/api/login/",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"login",
-								""
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "Busca de usuario pelo Id",
 					"event": [
