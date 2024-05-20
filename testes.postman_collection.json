@@ -378,7 +378,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{token}}",
+									"value": "{{TokenAdmin}}",
 									"type": "string"
 								},
 								{
@@ -569,7 +569,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{token}}",
+									"value": "{{TokenAdmin}}",
 									"type": "string"
 								},
 								{
@@ -661,7 +661,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{token}}",
+									"value": "{{TokenAdmin}}",
 									"type": "string"
 								},
 								{
@@ -753,7 +753,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{token}}",
+									"value": "{{TokenAdmin}}",
 									"type": "string"
 								},
 								{
@@ -847,7 +847,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{token}}",
+									"value": "{{TokenAdmin}}",
 									"type": "string"
 								},
 								{
@@ -940,7 +940,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{token}}",
+									"value": "{{TokenAdmin}}",
 									"type": "string"
 								},
 								{
@@ -1032,7 +1032,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{token}}",
+									"value": "{{TokenAdmin}}",
 									"type": "string"
 								},
 								{
@@ -1096,7 +1096,8 @@
 									"// Definir a variável de ambiente com o número gerado\r",
 									"pm.environment.set(\"randomNumber\", randomString);"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						},
 						{
@@ -1112,7 +1113,8 @@
 									"});\r",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -1121,6 +1123,11 @@
 							"type": "apikey",
 							"apikey": [
 								{
+									"key": "value",
+									"value": "{{TokenAdmin}}",
+									"type": "string"
+								},
+								{
 									"key": "key",
 									"value": "token",
 									"type": "string"
@@ -1128,11 +1135,6 @@
 								{
 									"key": "in",
 									"value": "query",
-									"type": "string"
-								},
-								{
-									"key": "value",
-									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -1213,7 +1215,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{token}}",
+									"value": "{{TokenAdmin}}",
 									"type": "string"
 								},
 								{
@@ -1329,7 +1331,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{token}}",
+									"value": "{{TokenAdmin}}",
 									"type": "string"
 								},
 								{
@@ -1445,7 +1447,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{token}}",
+									"value": "{{TokenAdmin}}",
 									"type": "string"
 								},
 								{
@@ -1496,7 +1498,9 @@
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
-									"pm.environment.set(\"variable_token\", \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ3ZWZkOWI5MWFhNjBhNDYyMTY1MzQiLCJmdWxsTmFtZSI6Ikp1bGlhbmEgU2lsdmEiLCJtYWlsIjoiSmVzc2llMTBAeWFob28uY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkQ1RMencxMU1GYzdwbVJKV2VVWmRiLlluOXlNU2RSbndrcHIvVVBzMkdsLlNaZUFwYTRuMTYiLCJhY2Nlc3NQcm9maWxlIjoiQURNSU4iLCJjcGYiOiI2NzYzMTMzOTEwOCIsInN0YXR1cyI6dHJ1ZSwiYXVkaXQiOlt7InJlZ2lzdGVyZWRCeSI6eyJ1c2VySWQiOiI2NTMzMDk5YWZhNzBkNTMwNzVjODFlZjQiLCJ1c2VyTG9naW4iOiJzeXNhZG1pbkBxYWNvZGVycy5jb20ifSwicmVnaXN0cmF0aW9uRGF0ZSI6InNleHRhLWZlaXJhLCAxNy8wNS8yMDI0LCAyMTowMToyOCBCUlQiLCJyZWdpc3RyYXRpb25OdW1iZXIiOiJRYUNvZGVycy00MjA4IiwiX2lkIjoiNjY0N2VmZDliOTFhYTYwYTQ2MjE2NTM1In1dLCJfX3YiOjAsImlhdCI6MTcxNTk5MjcxNiwiZXhwIjoxNzE2MDc5MTE2fQ.l9sMEAsJ9vRK8_Q0KdWHMX3a9JZ_QsBdspiyslt_-CA\");"
+									"",
+									"",
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -1550,13 +1554,13 @@
 							"type": "apikey",
 							"apikey": [
 								{
-									"key": "in",
-									"value": "query",
+									"key": "value",
+									"value": "{{TokenAdmin}}",
 									"type": "string"
 								},
 								{
-									"key": "value",
-									"value": "{{tokenAdm}}",
+									"key": "in",
+									"value": "query",
 									"type": "string"
 								},
 								{
@@ -1586,85 +1590,6 @@
 								"api",
 								"login",
 								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "atualizar o status de um usuário passando o id",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test('Status code is 200', function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"})\r",
-									"\r",
-									"pm.test(\"Status do usuario atualizado com sucesso\", function () {\r",
-									"    var responseJSON = pm.response.json();\r",
-									"    pm.expect(responseJSON).to.be.an('object');\r",
-									"    pm.expect(responseJSON.msg).to.exist.and.to.not.equal(\"true\");\r",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "apikey",
-							"apikey": [
-								{
-									"key": "value",
-									"value": "{{token}}",
-									"type": "string"
-								},
-								{
-									"key": "in",
-									"value": "query",
-									"type": "string"
-								},
-								{
-									"key": "key",
-									"value": "token",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"status\": false\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/api/user/status/{{Id}}",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"user",
-								"status",
-								"{{Id}}"
 							]
 						}
 					},
@@ -1722,7 +1647,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{variable_token}}",
+									"value": "{{TokenAdmin}}",
 									"type": "string"
 								},
 								{
@@ -1811,7 +1736,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{variable_token}}",
+									"value": "{{TokenAdmin}}",
 									"type": "string"
 								},
 								{
@@ -1896,7 +1821,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{variable_token}}",
+									"value": "{{TokenAdmin}}",
 									"type": "string"
 								},
 								{
@@ -1997,7 +1922,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{variable_token}}",
+									"value": "{{TokenAdmin}}",
 									"type": "string"
 								},
 								{
@@ -2097,7 +2022,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{variable_token}}",
+									"value": "{{TokenAdmin}}",
 									"type": "string"
 								},
 								{
@@ -2167,7 +2092,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{token}}",
+									"value": "{{TokenAdmin}}",
 									"type": "string"
 								},
 								{
@@ -2206,6 +2131,130 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "{{url}}/api/user/status/{{Id}}",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code is 200', function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Status do usuario atualizado com sucesso\", function () {\r",
+									"    var responseJSON = pm.response.json();\r",
+									"    pm.expect(responseJSON).to.be.an('object');\r",
+									"    pm.expect(responseJSON.msg).to.exist.and.to.not.equal(\"true\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TokenAdmin}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"status\": false\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user/status/{{Id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"status",
+								"{{Id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"// Define os detalhes da request\r",
+							"const requestOptions = {\r",
+							"    url: `${pm.variables.get(\"url\")}/api/login`,\r",
+							"    method: 'POST',\r",
+							"    header: {\r",
+							"        'accept': 'application/json',\r",
+							"        'Content-Type': 'application/json'\r",
+							"    },\r",
+							"    body: {\r",
+							"        mode: 'raw',\r",
+							"        raw: JSON.stringify({\r",
+							"            mail: \"Jessie10@yahoo.com\",\r",
+							"            password: \"1234@Test\"\r",
+							"        })\r",
+							"    }\r",
+							"};\r",
+							" \r",
+							"// Envia a request\r",
+							"pm.sendRequest(requestOptions, function (err, response) {\r",
+							"    if (!err) {\r",
+							"        pm.environment.set(\"TokenAdmin\", response.json().token);\r",
+							"    }\r",
+							"});\r",
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
@@ -2272,6 +2321,8 @@
 									"pm.test(\"Status code is 201\", function () {\r",
 									"    pm.response.to.have.status(201);\r",
 									"});\r",
+									"\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -2285,7 +2336,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{token}}",
+									"value": "{{TokenAdmin}}",
 									"type": "string"
 								},
 								{
@@ -2334,6 +2385,127 @@
 					"response": []
 				},
 				{
+					"name": "Deletar usuario",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const fullName = pm.environment.get('fullName')\r",
+									"\r",
+									"\r",
+									"const requestOptions = {\r",
+									"    url: `https://qualitys-hunters.qacoders-academy.com.br/api/user/`,\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'accept': 'application/json',\r",
+									"        'Content-Type': 'application/json',\r",
+									"        'Authorization': pm.environment.get(\"TokenAdmin\")\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            fullName: 'Sandra Aurora Hadassa Almeida',\r",
+									"            mail: 'sandra.auror.almeida@sp.gov.br',\r",
+									"            password: \"1234@Test\",\r",
+									"            accessProfile: \"ADMIN\",\r",
+									"            cpf: '12365498712',\r",
+									"            confirmPassword: \"1234@Test\"\r",
+									"\r",
+									"        })\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"\r",
+									"// Envia a request\r",
+									"pm.sendRequest(requestOptions, function (err, response) {\r",
+									"    if(!err){\r",
+									"            pm.environment.set(\"id_userdel\", response.json().user._id)\r",
+									"        }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Usuário deletado com sucesso!.\", function(){",
+									"    pm.expect(pm.response.json().msg).to.eql(\"Usuário deletado com sucesso!.\");",
+									"});",
+									"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TokenAdmin}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGU3ZjBlMTZiYmU3M2VkMWUxYzEiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRZWWpPM1d3ZlgwOHROMHJTWkQ1UVVlWW0wb2h1cGJCTkdzZnFUc3hnUHdIalMyYnFvcGR1eSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjM0OjIzIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBlN2YwZTE2YmJlNzNlZDFlMWMyIn1dLCJfX3YiOjAsImlhdCI6MTcwOTIzMzQxNiwiZXhwIjoxNzA5MzE5ODE2fQ.AifdGJewaXsoJqvsOy7j4b2Q9MpNGGoeclHNfStrHHc"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/user/{{id_userdel}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"{{id_userdel}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "CT-0001 - Validar se o cadastro foi deletado",
 					"event": [
 						{
@@ -2374,7 +2546,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{variable_token}}",
+									"value": "{{TokenAdmin}}",
 									"type": "string"
 								},
 								{
@@ -2402,129 +2574,6 @@
 							{
 								"key": "Authorization",
 								"value": "{{novotoken}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{url}}/api/user/{{id_userdel}}",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"user",
-								"{{id_userdel}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Deletar usuario",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"const fullName = pm.environment.get('fullName')\r",
-									"\r",
-									"\r",
-									"const requestOptions = {\r",
-									"    url: `https://qualitys-hunters.qacoders-academy.com.br/api/user/`,\r",
-									"    method: 'POST',\r",
-									"    header: {\r",
-									"        'accept': 'application/json',\r",
-									"        'Content-Type': 'application/json',\r",
-									"        'Authorization': pm.environment.get(\"token\")\r",
-									"    },\r",
-									"    body: {\r",
-									"        mode: 'raw',\r",
-									"        raw: JSON.stringify({\r",
-									"            fullName: 'Sandra Aurora Hadassa Almeida',\r",
-									"            mail: 'sandra.aurora.almeida@sp.gov.br',\r",
-									"            password: \"1234@Test\",\r",
-									"            accessProfile: \"ADMIN\",\r",
-									"            cpf: '01837129193',\r",
-									"            confirmPassword: \"1234@Test\"\r",
-									"\r",
-									"        })\r",
-									"    }\r",
-									"};\r",
-									"\r",
-									"// Envia a request\r",
-									"pm.sendRequest(requestOptions, function (err, response) {\r",
-									"    if(!err){\r",
-									"            pm.environment.set(\"id_userdel\", response.json().user._id)\r",
-									"        }\r",
-									"});\r",
-									"\r",
-									"\r",
-									"\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"",
-									"pm.test(\"Usuário deletado com sucesso!.\", function(){",
-									"    pm.expect(pm.response.json().msg).to.eql(\"Usuário deletado com sucesso!.\");",
-									"});",
-									"",
-									"",
-									"",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "apikey",
-							"apikey": [
-								{
-									"key": "value",
-									"value": "{{variable_token}}",
-									"type": "string"
-								},
-								{
-									"key": "in",
-									"value": "query",
-									"type": "string"
-								},
-								{
-									"key": "key",
-									"value": "token",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGU3ZjBlMTZiYmU3M2VkMWUxYzEiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRZWWpPM1d3ZlgwOHROMHJTWkQ1UVVlWW0wb2h1cGJCTkdzZnFUc3hnUHdIalMyYnFvcGR1eSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjM0OjIzIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBlN2YwZTE2YmJlNzNlZDFlMWMyIn1dLCJfX3YiOjAsImlhdCI6MTcwOTIzMzQxNiwiZXhwIjoxNzA5MzE5ODE2fQ.AifdGJewaXsoJqvsOy7j4b2Q9MpNGGoeclHNfStrHHc"
 							}
 						],
 						"body": {
@@ -2584,7 +2633,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{token}}",
+									"value": "{{TokenAdmin}}",
 									"type": "string"
 								},
 								{
@@ -2614,6 +2663,51 @@
 						}
 					},
 					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"// Define os detalhes da request\r",
+							"const requestOptions = {\r",
+							"    url: `${pm.variables.get(\"url\")}/api/login`,\r",
+							"    method: 'POST',\r",
+							"    header: {\r",
+							"        'accept': 'application/json',\r",
+							"        'Content-Type': 'application/json'\r",
+							"    },\r",
+							"    body: {\r",
+							"        mode: 'raw',\r",
+							"        raw: JSON.stringify({\r",
+							"            mail: \"Jessie10@yahoo.com\",\r",
+							"            password: \"1234@Test\"\r",
+							"        })\r",
+							"    }\r",
+							"};\r",
+							" \r",
+							"// Envia a request\r",
+							"pm.sendRequest(requestOptions, function (err, response) {\r",
+							"    if (!err) {\r",
+							"        pm.environment.set(\"TokenAdmin\", response.json().token);\r",
+							"    }\r",
+							"});\r",
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
@@ -2660,7 +2754,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{token}}",
+									"value": "{{TokenAdmin}}",
 									"type": "string"
 								},
 								{
@@ -2738,7 +2832,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{token}}",
+									"value": "{{TokenAdmin}}",
 									"type": "string"
 								},
 								{
@@ -2824,7 +2918,7 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "{{token}}",
+									"value": "{{TokenAdmin}}",
 									"type": "string"
 								},
 								{
@@ -2873,6 +2967,50 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"// Define os detalhes da request\r",
+					"const requestOptions = {\r",
+					"    url: `${pm.variables.get(\"url\")}/api/login`,\r",
+					"    method: 'POST',\r",
+					"    header: {\r",
+					"        'accept': 'application/json',\r",
+					"        'Content-Type': 'application/json'\r",
+					"    },\r",
+					"    body: {\r",
+					"        mode: 'raw',\r",
+					"        raw: JSON.stringify({\r",
+					"            mail: \"sysadmin@qacoders.com\",\r",
+					"            password: \"1234@Test\"\r",
+					"        })\r",
+					"    }\r",
+					"};\r",
+					" \r",
+					"// Envia a request\r",
+					"pm.sendRequest(requestOptions, function (err, response) {\r",
+					"    if (!err) {\r",
+					"        pm.environment.set(\"TokenAdmin\", response.json().token);\r",
+					"    }\r",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }
